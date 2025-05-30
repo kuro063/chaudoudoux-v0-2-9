@@ -16,6 +16,8 @@ switch($action) {
 			break;
 
 		case 'exportContact':
+			$lesFamilles=$pdoChaudoudoux->obtenirListeFamille();
+			include("vues/v_exportContact.php");
 			break;
 
         default :

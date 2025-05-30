@@ -2437,7 +2437,7 @@ $cmd = $this->monPdo->prepare($req);
         return $res;
     }
     public function obtenirMailPapa($num){/*Vincent*/
-        $req="SELECT distinct email_Parents as mailPapa from parents where numero_Famille=:num limit 1,1";
+        $req="SELECT distinct email_Parents as mailPapa from parents where numero_Famille=:num limit 1";
         $cmd=$this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
 	$cmd->execute();
@@ -2462,7 +2462,7 @@ $cmd = $this->monPdo->prepare($req);
 
     public function obtenirTelPapa($num)/*Vincent*/
     {
-        $req="SELECT distinct telPortable_Parents as telPapa from parents where numero_Famille=:num limit 1,1";
+        $req="SELECT distinct telPortable_Parents as telPapa from parents where numero_Famille=:num limit 1";
         $cmd = $this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
 	    $cmd->execute();
