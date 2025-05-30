@@ -1004,6 +1004,21 @@ else  {
                         include("vues/v_detailCandidat.php");
                     }
                     break;
+
+        case 'introEntretien':
+            include('vues/v_entretienIntro.php');
+            break;
+
+        case 'voirEntretien':
+            if(lireDonneeUrl('statut') == 'pro'){
+                $entretien = $pdoChaudoudoux->listeEntretiensGlobal(1);
+            }
+            else{
+                $entretien = $pdoChaudoudoux->listeEntretiensGlobal(0);
+            }
+            include('vues/v_entretiens.php');
+            break;
+
         case 'mailIntervPrest':
             $adressesPrest = $pdoChaudoudoux->mailPrestInterv();
             $nbAdresse = count($pdoChaudoudoux->mailPrestInterv());

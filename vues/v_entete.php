@@ -325,6 +325,10 @@ if ($pageActuelle != 'planning.php') {
                 <div class="dropdown-menu">
                   <a class="text-white dropdown-item display-4" href="index.php?uc=admin&amp;action=adresse"
                     aria-expanded="false">Carnet d'adresses mail</a>
+                  
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuSalarie&amp;action=introEntretien"
+                    aria-expanded="false">Entretien</a>
+
                   <a class="text-white dropdown-item display-4"
                     href="index.php?uc=annuFact&amp;action=voirTousFact&amp;ordre=alpha">Aide à la facturation<br></a>
                   <a class="text-white dropdown-item display-4"

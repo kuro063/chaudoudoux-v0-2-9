@@ -957,6 +957,8 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
         return $lignes;
     }
     
+    /* Permet d'obtenir la liste des entretiens personnels pour chaque intervenantes en fonction de $num
+    */ 
     public function obtenirListeEntretiens($num){
         $req="SELECT * from entretiens WHERE numSalarie_Intervenants = :num ORDER BY `date` DESC";
         $cmd = $this->monPdo->prepare($req);
@@ -966,6 +968,25 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
         $cmd->closeCursor();
         return $lignes;
     }
+
+    /* Permet d'obtenir la liste des entretiens en fonction de professionnel
+    ou individuel en fonction de $num
+    */ 
+    public function listeEntretiensGlobal($num){
+        $req="SELECT intervenants.numSalarie_Intervenants, titre_Candidats, nom_Candidats, prenom_Candidats, `date`, commentaire FROM candidats
+        JOIN intervenants
+        ON intervenants.candidats_numcandidat_candidats = candidats.numCandidat_Candidats
+        JOIN entretiens
+        ON intervenants.numSalarie_Intervenants = entretiens.numSalarie_Intervenants
+        WHERE pro = :num ORDER BY `date` DESC";
+        $cmd = $this->monPdo->prepare($req);
+        $cmd->bindValue('num', $num);
+        $cmd->execute();
+        $lignes = $cmd->fetchAll(PDO::FETCH_ASSOC);
+        $cmd->closeCursor();
+        return $lignes;
+    }
+
     public function obtenirPresta($num){
         $req = "SELECT distinct type_Prestations, intitule_TypeADH from proposer join prestations on proposer.idPresta_Prestations=prestations.idPresta_Prestations join typeadh on proposer.idADH_TypeADH=typeadh.idADH_TypeADH where numero_Famille=:num and (dateFin_Proposer>now() or dateFin_Proposer='0000-00-00')"; 
         $cmd = $this->monPdo->prepare($req);
