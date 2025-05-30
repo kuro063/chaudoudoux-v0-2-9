@@ -1,0 +1,72 @@
+<?php
+/* La directive @var permet de déclarer une variable créée dans un script séparé 
+ * du présent script, et ainsi de bénéficier de l'auto-complétion sur cette variable
+ */
+/* @var $pdoExetud PdoExetud */
+/* @var $tabErreurs array */
+$action = lireDonneeUrl('action', 'demanderConnexion');
+
+// Nombre de tentatives maximum de connexion
+$nbrTentatives = 3;
+// Durée d'un timeout si le nombre de tentative est atteint (en secondes)
+$time = 60;
+
+switch($action) {
+	case 'demanderConnexion':
+        //include("vues/v_sommaire.php");
+		include("vues/v_connexion.php");          
+		break;
+	
+	case 'validerConnexion':
+		// On regarde si un timeout est actif
+		if(isset($_SESSION["timeout"]) && time() < $_SESSION["timeout"]){
+			ajouterErreur("Nombre maximal de tentatives atteintes. Veuillez attendre ".$time." secondes", $tabErreurs);
+			include("vues/v_connexion.php");
+			exit();
+		}
+		$login = htmlentities($_POST['txtNom'], FILTER_SANITIZE_STRING);
+		$mdp = filter_var(htmlentities($_POST['txtMdp'],FILTER_SANITIZE_STRING));
+		$unUtil = $pdoChaudoudoux->obtenirInfosUser($login,$mdp);
+		if(!is_array($unUtil)){
+			// On vérifie si la variable de session tentatives existe ou non
+			if(!isset($_SESSION["tentatives"])){
+				$_SESSION["tentatives"] = 1;
+			}
+			else {
+				$_SESSION["tentatives"]++;
+			}
+			// On regarde si on a atteint le nombre max de tentatives
+			if($_SESSION["tentatives"] >= $nbrTentatives){
+				$_SESSION["timeout"] = time() + $time;
+				ajouterErreur("Nombre maximal de tentatives atteintes. Veuillez attendre ".$time." secondes", $tabErreurs);
+			}
+			else{
+				ajouterErreur("Login ou mot de passe incorrect", $tabErreurs);
+			}
+			//include("vues/v_sommaire.php");
+			include("vues/v_connexion.php");
+		}
+		else{
+			$id = $unUtil['id'];
+			$nom =  $unUtil['nom'];
+			$prenom = $unUtil['prenom'];
+			connecter($id,$nom,$prenom);
+			//include("vues/v_sommaire.php");
+			//include("vues/v_connexion.php");	
+			header("Location: ./?uc=informations&action=voirAccueil");	
+		}
+		break;
+
+	case 'demanderDeconnexion':
+                deconnecter();
+		//include("vues/v_sommaire.php");
+			include("vues/v_accueil.php");
+		//header("Location: ./");
+		break;
+
+    default :
+		//include("vues/v_sommaire.php");
+		include("vues/v_connexion.php");
+		break;
+}
+?>

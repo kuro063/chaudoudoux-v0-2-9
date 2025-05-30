@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_modifFicheCandid.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_listeSalaries.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/styles/script.js</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/styles/sorttable.js</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_search.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_connexion.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_listeFact.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_accueil.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_modifForm.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_annuSalarie.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_detailFamille.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_advSearch.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_decisionCandid.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_ajoutFamille.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_entrees.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_attribution.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_annuFamille.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/styles/styles.css</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/include/class.pdoBdChaudoudoux.inc.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_modifFicheFamille.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_ajouterCandid.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_admin.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_entete.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_listeForm.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_annuCandid.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_formations.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/planning.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_sommaire.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/controleurs/c_interventions.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_detailCandidat.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_listeFamilles.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_annuInterv.php</file>
+            <file>file:/C:/xampp/htdocs/ED/stage-chaudoudoux20180528/stage-chaudoudoux20180528/AppliChaudoudoux/vues/v_detailSalarie.php</file>
+        </group>
+    </open-files>
+</project-private>

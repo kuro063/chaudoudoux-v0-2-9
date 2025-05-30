@@ -1,0 +1,29 @@
+# désactive la naviguation dans les dossiers de l'application
+Options All -Indexes
+
+# Désactive l'affichage de la version d'Apache
+ServerSignature Off
+
+# Deny access to .htaccess
+<Files .htaccess>
+	Order allow,deny
+	Deny from all
+</Files>
+
+<FilesMatch "\.xml$">
+	Deny from all
+</FilesMatch>
+
+# Protège les fichiers de configuration
+<FilesMatch "(^#.*#|\.(bak|config|sql|fla|ini|log|sh|inc|swp|dist)|~)$">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+
+<Files register.php>
+	order deny,allow
+	deny from all
+	Require local
+	allow from all
+</Files>

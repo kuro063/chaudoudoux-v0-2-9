@@ -1,0 +1,61 @@
+<?php
+
+include("vues/v_sommaire.php");
+// vérification du droit d'accès au cas d'utilisation
+if ( ! estConnecte() ) {
+    ajouterErreur("L'accès à cette page requiert une authentification !", $tabErreurs);
+    include('vues/v_erreurs.php');
+}
+else {
+    $action = lireDonneeUrl('action', 'associerInterv');
+    switch ($action){
+        case 'associerInterv' :
+            $lesFam=$pdoChaudoudoux->obtenirNomsFamille();
+            // $lesSal=$pdoChaudoudoux->obtenirListeSalarieSelect();
+            include ('vues/v_attribution.php');
+            break;
+        case 'validInterv' :
+            
+           
+            $numInterv= lireDonneePost('interv');
+            $presta= lireDonneePost('presta');
+            for ($i=0;$i<4;++$i){
+            $dateDeb= lireDonneePost('dateDeb'.$i);
+            $dateFin= lireDonneePost('dateFin'.$i);
+            $numFam= lireDonneePost('famille'.$i);
+            $validFam= lireDonneePost('validFam'.$i);
+            $validInterv= lireDonneePost('validInterv'.$i);
+            $idADH= lireDonneePost('idADH'.$i);
+            
+            for ($k=0;$k<5;++$k){
+            $jour= lireDonneePost('slctJour'.$i.$k);
+            $Hdeb= lireDonneePost('Hdeb'.$i.$k);
+            $Hfin= lireDonneePost('Hfin'.$i.$k);
+            $minDeb= lireDonneePost('minDeb'.$i.$k);
+            $minFin= lireDonneePost('minFin'.$i.$k);
+            $Hdeb=$Hdeb.":".$minDeb.":00";
+            $Hfin=$Hfin.":".$minFin.":00";
+            $modalites= lireDonneePost('modalites'.$i.$k);
+            $freq= lireDonneePost('frequence'.$i.$k);
+             if($numFam==9999 && $jour!='jour')
+            {$pdoChaudoudoux->attributionIntervFamille($numFam, $numInterv, 'DISP', 'DISP', '', $dateDeb, $dateFin, $modalites,$jour, $Hdeb,$Hfin, 1, 1, $freq);}
+            if ($jour!='jour' && $numFam!=9999){
+            $pdoChaudoudoux->attributionIntervFamille($numFam, $numInterv, $presta, $idADH, '', $dateDeb, $dateFin, $modalites,$jour, $Hdeb,$Hfin, 1, 1, $freq);
+            }}}
+           
+           
+          /*case 'verifNum' : 
+             /*   $numFam= lireDonneePost('numFam');
+                $numInterv= lireDonneePost('numInterv');*/
+              //  $pdoChaudoudoux->attributionIntervFamille($numInterv, $numFam, $presta, $idADH, $options, $dateDeb, $dateFin, $modalites,$jour, $Hdeb,$Hfin);
+                ajouterErreur("Attribution effectuée", $tabErreurs);
+                ajouterErreur('<a class="btn btn-md btn-secondary display-4" href="planning.php?num='.$numInterv.'" target="_blank">Ouvrir le planning</a>', $tabErreurs);
+                include('vues/v_erreurs.php');
+            break;
+        default:             $lesFam=$pdoChaudoudoux->obtenirNomsFamille();
+            // $lesSal=$pdoChaudoudoux->obtenirListeSalarieSelect();
+            include ('vues/v_attribution.php');
+
+
+    }
+}

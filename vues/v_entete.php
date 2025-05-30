@@ -1,0 +1,429 @@
+<?php
+
+$pageActuelle = substr($_SERVER['PHP_SELF'], -12);
+if ($pageActuelle != 'planning.php') {
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MODIFIER une famille
+  //et avec la bonne url 
+  if (lireDonneeUrl('action') == 'validerModifFamille') {
+    $action = 'voirDetailFamille';
+    //On récupère le numéro de la famille sélèctionné
+    //$_SERVER['REQUEST_URI'] correpond à l'url de la page avec les GET/POST
+    $lastnum = explode("num=", $_SERVER['REQUEST_URI']);
+    header('Location: index.php?uc=annuFamille&action=voirDetailFamille&num=' . $lastnum[1]);
+  }
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir AJOUTE une famille
+  //et avec la bonne url
+  if (lireDonneeUrl('action') == 'validerAjoutFamille') {
+    $action = 'voirDetailFamille';
+    $codeClient = $_POST['txtCodCli']; //Récupère le code client entré à la création
+    //header('Location:  index.php?uc=annuFamille&action=voirDetailFamille&num='.$codeClient);
+  }
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MODIFIER un candidat
+  //et avec la bonne url
+  if (lireDonneeUrl('action') == 'validerModifCandid') {
+    $action = 'voirDetailCandid';
+    $lastnumCand = explode("num=", $_SERVER['REQUEST_URI']);
+    header('Location:  index.php?uc=annuCandid&action=voirDetailCandid&num=' . $lastnumCand[1]);
+  }
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MODIFIER un salarié
+  //et avec la bonne url
+  if (lireDonneeUrl('action') == 'ValiderModifSalarie') {
+    $action = 'voirDetailSalarie';
+    $lastnumSal = explode("num=", $_SERVER['REQUEST_URI']);
+    header('Location:  index.php?uc=annuSalarie&action=voirDetailSalarie&num=' . $lastnumSal[1]);
+  }
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MASQUER un intervenant
+  //de la page de matching GE
+  if (lireDonneeUrl('action') == 'masquerIntervGE') {
+    $action = 'voirMatchingFamilleGE';
+    header('Location:  index.php?uc=annuFamille&action=voirMatchingFamilleGE');
+  }
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MASQUER un intervenant
+  //de la page de matching Menage
+  if (lireDonneeUrl('action') == 'masquerIntervMenage') {
+    $action = 'voirMatchingFamilleGE';
+    header('Location:  index.php?uc=annuFamille&action=voirMatchingFamilleMenage');
+  }
+
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MASQUER un intervenant
+  //de la page de matching GE
+  if (lireDonneeUrl('action') == 'demasquerIntervGE') {
+    $action = 'voirMatchingFamilleGEMasque';
+    header('Location:  index.php?uc=annuFamille&action=voirMatchingFamilleGEMasque');
+  }
+  //Cette condition s'assure que l'utilistaur retourne sur la bonne page après avoir MASQUER un intervenant
+  //de la page de matching Menage
+  if (lireDonneeUrl('action') == 'demasquerIntervMenage') {
+    $action = 'voirMatchingFamilleGEMasque';
+    header('Location:  index.php?uc=annuFamille&action=voirMatchingFamilleMenageMasque');
+  }
+}
+
+?>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+  <title style="font-size: 1.3em"><?php
+  if ($pageActuelle != 'planning.php') {
+    if (estConnecte()) {
+      echo obtenirPrenomConnecte() . "  " . obtenirNomConnecte();
+    }
+  } else {
+    echo 'PLANNING AU : ' . ' ' . date('d/m/Y');
+  }
+  ?>
+  </title>
+
+  <meta charset="utf-8" />
+  <link rel="stylesheet" type="text/css" href="./styles/styles.css" />
+  <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
+  <!-- Site made with Mobirise Website Builder v4.7.7, https://mobirise.com -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.7.7, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo4.png" type="image/x-icon">
+  <meta name="description" content="Web Site Builder Description">
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css?refresh=0">
+  <!--Variable à modifié après changements apportés auu fichier style.css afin de reinitialiser le cache du navigateur-->
+  <link rel="stylesheet" href="assets/theme/css/style.css?refresh=0">
+  <!--Variable à modifié après changements apportés auu fichier style.css afin de reinitialiser le cache du navigateur-->
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  <script type="text/javascript" src="./styles/sorttable.js"></script>
+  <!--<script type="text/javascript">
+    document.body.style.transform="scale(0.5)";</script>-->
+  <style type="text/css" media="print">
+    @page {
+      size: landscape;
+    }
+  </style>
+  <script src="./styles/geo-api.js"></script>
+  <script type="module">
+    import { getDistance } from "./styles/geo-api.js";
+    (async () => {
+      const tab = document.querySelectorAll("#listeInterv")[1];
+      if (!tab) {
+        return;
+      }
+      console.log(tab)
+      for (const line of tab.rows) {
+        if (!line.querySelector("th")) {
+          console.log(line.querySelectorAll("td"))
+          const addr_can = line.querySelectorAll("td")[0].textContent.trim();
+          const addr_fam = line.querySelectorAll("td")[1].textContent.trim();
+          const addr_chau = "22 rue jean Guéhenno, 35700, Rennes";
+          const dist_can_fam = line.querySelectorAll("td")[11];
+          const dist_chau_fam = line.querySelectorAll("td")[12];
+          if (dist_can_fam && dist_chau_fam) {
+
+            dist_can_fam.textContent = await getDistance(addr_can, addr_fam) + " Km";
+
+            dist_chau_fam.textContent = await getDistance(addr_chau, addr_fam) + " Km";
+
+
+          }
+        }
+      }
+    })();
+  </script>
+</head>
+<script type="text/javascript" src="./styles/script.js"></script>
+
+<body style="padding:0; margin:0">
+  <section class="menu cid-qWatZBF518" once="menu" id="menu1-2c">
+
+    <?php
+    if ($pageActuelle != 'planning.php') {
+      if (estConnecte()) {
+        ?>
+
+        <!--style="position:static-->
+        <nav style='<?php if ($pageActuelle == "planning.php") {
+          echo "display:none";
+        } ?>'
+          class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+          <!--<div class="menu-logo" style='display: flex; flex-direction: row; margin:auto'>-->
+
+          <div class="topnav">
+            <form action="index.php?uc=search&amp;action=search" method="post">
+
+              <input type="text" placeholder="Rechercher" name="search">
+              <button type="submit"
+                style="border-bottom-right-radius:25px; border-top-right-radius:25px"><span>Rechercher</span></button>
+
+            </form>
+          </div>
+
+          <div class="navbar-brand">
+          </div>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav nav-dropdown nav-right navbar-nav-top-padding" data-app-modern-menu="true">
+              <!--<li class="nav-item" style="margin-right:150px"><a class="text-white dropdown-item display-4">Session : </*?php if (estConnecte()){echo obtenirPrenomConnecte();}?*/></a></li>-->
+              <li class="nav-item"><a class="nav-link link text-white display-4"
+                  href="index.php?uc=informations&amp;action=voirAccueil" aria-expanded="true"><span
+                    class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>Accueil</a></li>
+              <li class="nav-item dropdown">
+
+                <a class="nav-link link text-white dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu"
+                  aria-expanded="false"><span class="mbri-users mbr-iconfont mbr-iconfont-btn"></span>Familles</a>
+                <div class="dropdown-menu">
+                  <a href="index.php?uc=annuFamille&amp;action=ajoutFamille"
+                    class="text-white dropdown-item display-4">Création famille</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFamille&amp;action=voirTousFamille">Familles</a>
+
+                  <div class="dropdown open">
+                    <a class="text-white dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu"
+                      aria-expanded="true">Familles à pourvoir</a>
+                    <div class="dropdown-menu dropdown-submenu">
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleAPourvoir">Toutes familles à pourvoir</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleAPourvoirM">Familles à pourvoir Ménages</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleBesoinM">Besoins des familles Ménage
+                        Immédiat</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleBesoinMFutur">Besoins des familles Ménage
+                        Futur</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleAPourvoirGE">Familles à pourvoir Garde
+                        Enfants</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleBesoinGE">Besoins des familles Garde
+                        Enfants Immédiat</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirTousFamilleBesoinGEFutur">Besoins des familles Garde
+                        Enfants Futur</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuFamille&amp;action=voirCarteAPourvoir">Carte des Familles à pourvoir</a>
+
+                    </div>
+                    <a class="text-white dropdown-item display-4 "
+                      href="index.php?uc=annuFamille&amp;action=voirTousFamilleGardePart">Familles garde partagée</a>
+                    <a class="text-white dropdown-item display-4 "
+                      href="index.php?uc=annuFamille&amp;action=voirTousFamilleMand">Familles Mandataires</a>
+                    <a class="text-white dropdown-item display-4 "
+                      href="index.php?uc=annuFamille&amp;action=voirTousFamillePrestaM">Familles Prestataires Ménage</a>
+                    <a class="text-white dropdown-item display-4 "
+                      href="index.php?uc=annuFamille&amp;action=voirTousFamillePrestaGE">Familles Prestataires GE</a>
+                    <a class="text-white dropdown-item display-4 "
+                      href="index.php?uc=annuFamille&amp;action=voirTousFamilleArchive">Archives familles</a>
+
+                  </div>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" href="#"
+                  data-toggle="dropdown-submenu" aria-expanded="false">
+                  <span class="mbri-user2 mbr-iconfont mbr-iconfont-btn"></span>Intervenants</a>
+                <div class="dropdown-menu">
+
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=tousIntervenants">Intervenants</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=complH">Intervenants en recherche de complément</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirSalPlace">Intervenants placés</a>
+                  <div class="dropdown open">
+                    <a class="text-white dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu"
+                      aria-expanded="true">Intervenants non placés</a>
+                    <div class="dropdown-menu dropdown-submenu">
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirTousSalarie" aria-expanded="false">Tous les
+                        Intervenants Non placés</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirTousSalarieplaces" aria-expanded="false">Intervenants
+                        qui ont été Placés</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirTousSalariejamaisplaces"
+                        aria-expanded="false">Intervenant jamais Placés</a>
+                    </div>
+                  </div>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuSalarie&amp;action=Formation"
+                    aria-expanded="false">Formation Intervenants</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirSalRennes">Intervenants Rennais</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirSalHorsRennes">Intervenants Hors Rennes</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirSalVehicule">Intervenants véhiculés</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirTousSalarieArret" aria-expanded="false">Intervenants en
+                    arrêt de travail</a>
+
+
+                  <div class="dropdown open">
+                    <a class="text-white dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu"
+                      aria-expanded="true">Garde d'enfants</a>
+                    <div class="dropdown-menu dropdown-submenu">
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalGE">Intervenants Garde d'enfants placés</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalGENP">Intervenants Garde d'enfants non placés</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalmoins3a">Intervenants moins de 3 ans</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalenfHand">Intervenants enfants handicapés</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalGEP">Intervenants Garde d'enfants prestataires</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalGEM">Intervenants Garde d'enfants mandataires</a>
+                    </div>
+                  </div>
+                  <div class="dropdown open">
+                    <a class="text-white dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu"
+                      aria-expanded="true">Ménage</a>
+                    <div class="dropdown-menu dropdown-submenu">
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalMenage">Intervenants Ménage placés</a>
+                      <a class="text-white dropdown-item display-4"
+                        href="index.php?uc=annuSalarie&amp;action=voirSalMenageNP">Intervenants Ménage non placés</a>
+                    </div>
+                  </div>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirTousSalarieArchive" aria-expanded="false">Archives
+                    Intervenants placés</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirTousSalarieArchiveNonPlace" aria-expanded="false">Archives
+                    intervenants non placés</a>
+
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirTousDispoIntervM">Disponibilités des intervenants
+                    ménage</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirTousDispoIntervGE">Disponibilités des intervenants pour la
+                    garde enfants</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuSalarie&amp;action=voirCarteIntervenants">Carte des Intervenants</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" href="#"
+                  data-toggle="dropdown-submenu" aria-expanded="false">
+                  <span class="mbri-file mbr-iconfont mbr-iconfont-btn"></span>Candidats<br></a>
+                <div class="dropdown-menu">
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuCandid&amp;action=ajouterCandid">Création candidat</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuCandid&amp;action=voirTousCandid">Candidats</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuCandid&amp;action=voirTousCandidRefuse" aria-expanded="false">Candidats
+                    refusés</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" href="#"
+                  data-toggle="dropdown-submenu" aria-expanded="false">
+                  <span class="mbri-setting3 mbr-iconfont mbr-iconfont-btn"></span>Outils de requête</a>
+                <div class="dropdown-menu">
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=admin&amp;action=adresse"
+                    aria-expanded="false">Carnet d'adresses mail</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFact&amp;action=voirTousFact&amp;ordre=alpha">Aide à la facturation<br></a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFact&amp;action=voirTousFact&amp;ordre=prelevement" aria-expanded="false">Aide au
+                    prélèvement<br></a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuFact&amp;action=voirTousEntree"
+                    aria-expanded="false">Entrées du mois<br></a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuSalarie&amp;action=vueModif">DJAID
+                    Dernières modifications de planning prestataires</a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuFamille&amp;action=vueMand">Djaid
+                    consultation Mandataires</a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuFamille&amp;action=vuePrestGE">Djaid
+                    consultation prestataires GE</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFamille&amp;action=vuePrestGEKM">Djaid consultation prestataires GE avec Km</a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuFamille&amp;action=vuePrestM">Djaid
+                    consultation prestataires Ménage</a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=annuFamille&amp;action=vuePrestMKM">Djaid
+                    consultation prestataires Ménage avec Km</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFamille&amp;action=voirTousFamilleAssembGen">Djaid assemblée générale</a>
+
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFamille&amp;action=voirMatchingFamilleGE">Matching famille Garde d'enfants</a>
+                  <a class="text-white dropdown-item display-4"
+                    href="index.php?uc=annuFamille&amp;action=voirMatchingFamilleMenage">Matching famille Menage</a>
+
+                  <!--- La table ASSEMBLEE n'existe pas / En commentaire car cela générait une erreur --->
+              <!--- <a class="text-white dropdown-item display-4" href="index.php?uc=annuFamille&amp;action=assembGen">TEST djaid assemblée générale</a> --->
+
+              <a class="text-white dropdown-item display-4" href="index.php?uc=formations&amp;action=voirTousForm"
+                aria-expanded="false">Formations intra-Chaudoudoux</a>
+              <!-- <div class="dropdown open"><a class="text-white dropdown-item dropdown-toggle display-4" href="#" data-toggle="dropdown-submenu" aria-expanded="true">Vues gestion</a><div class="dropdown-menu dropdown-submenu"><a class="text-white dropdown-item display-4" href="#">#</a></div></div>-->
+                </div>
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link link text-white dropdown-toggle display-4" href="#"
+                  aria-expanded="false" data-toggle="dropdown-submenu">
+                  <span class="mbri-setting mbr-iconfont mbr-iconfont-btn"></span>Paramètres</a>
+                <div class="dropdown-menu">
+                  <?php if (obtenirNomConnecte() == 'Le Directeur' || obtenirNomConnecte() == 'Djaid') { ?>
+                    <a class="text-white dropdown-item display-4" href="index.php?uc=admin&amp;action=admin"
+                      aria-expanded="false">Page administrateur<br></a> <?php } ?>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=connexion&amp;action=demanderDeconnexion"
+                    aria-expanded="false">Déconnexion<br></a><a class="text-white dropdown-item display-4"
+                    href="index.php?uc=fichePerso&amp;action=demanderModif" aria-expanded="false">Mot de passe<br></a>
+                </div>
+              </li>
+              <li class="nav-item">
+                </form>
+              </li>
+            </ul>
+
+          </div>
+        </nav>
+        <div id="wrapper" style="margin-top: 100px">
+          <!--Vincent/cela permet a la bare de nvigation de ne pas chevaucherl'affichage du contenu de chaquepage, c'est une div wrapper(emballage)-->
+        <?php } else {
+        ?> <!--style="position: static;"-->
+          <nav style="position: fixed; align-items:center"
+            class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-toggleable-sm">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+            <div class="menu-logo">
+              <div class="navbar-brand">
+                <span class="navbar-logo">
+                </span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-white display-4" href="#">
+                    La maison des chaudoudoux<br>Gestion de données</a></span>
+              </div>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <!--Boutton Connexion-->
+              <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4"
+                  href="index.php?uc=connexion&action=demanderConnexion"><span
+                    class="mbri-unlock mbr-iconfont mbr-iconfont-btn"></span>Connexion</a></div>
+            </div>
+          </nav>
+          <?php
+      }
+    }
+    ?>
+      </ul>
+    </div>
+  </section>
+
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/dropdown/js/script.min.js"></script>
+  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/theme/js/script.js"></script>
+  <!-- <div id="page"> -->

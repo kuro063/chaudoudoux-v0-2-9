@@ -1,0 +1,797 @@
+﻿/* style à appliquer à la balise ul d'identifiant menuList */
+/* Classe obligatoire pour les flèches */
+
+h1,h2,h3,th,a{
+    text-transform: uppercase;
+}
+h6,h4,h5{
+    font-variant: small-caps;
+}
+.flecheDesc {
+  width: 0; 
+  height: 0; 
+  float:right;
+  margin: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid black;
+}
+.zebre {border-radius: 12px;}
+.flecheAsc {
+  width: 0; 
+  height: 0;
+  float:right;
+  margin: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+
+/* Classe optionnelle pour le style */
+.tableau {width:100%;table-layout: fixed;border-collapse: collapse;}
+.tableau td {padding:.3rem}
+.avectri th {text-align:center;padding:5px 0 0 5px;vertical-align: middle;background-color:#FF3366;color:#444;cursor:pointer;
+	-webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  border: black solid 1px; 
+  border-collapse: collapse;
+}
+.zebre td{border: black solid 1px; 
+  border-collapse: collapse;}
+.avectri th.selection {background-color:#FF3366;color:#fff;}
+.avectri th.selection .flecheDesc {border-bottom-color: white;}
+.avectri th.selection .flecheAsc {border-top-color: white;}
+.zebre tbody td:nth-child(3) {text-align:center;}
+
+ul#menuList{
+    list-style:none;
+    margin:auto;
+    padding:0px;
+/*    width:118px;*/
+    width:98%;
+    font-size: 1em;
+}
+.lien{
+    margin-top : 10px;
+    padding: 10px;
+    background-color: #ff9933;
+    color: #000;
+/*	width: 180px;*/
+    border : solid 2px rgb(178,207,81);
+    border-radius :33px;
+}
+/* style à appliquer aux éléments de la balise ul d'identifiant menuList */
+ul fieldset{
+    padding: 3px;
+    margin: 5px;
+}
+ul#menuList li {
+    
+    position:relative;
+    margin:3px;
+    padding:3px;
+    border : rosybrown dotted 1px;
+    border-radius: 12px;
+}
+
+/* apparences des liens dans listes et sous-listes non numérotées */
+ul#menuList a {
+    color: saddlebrown;
+    display:block;
+    text-decoration:none;
+    width:100%;
+}
+ul#menuList a:hover {
+    background: sandybrown;
+    color: white;
+}
+/* apparences des liens dans la division infosUtil */
+#infosUtil a {
+    color:rgb(178,207,81);
+    text-decoration:none;
+}
+#infosUtil a:hover {
+    background: rgb(178,207,81);
+    color: white;
+}
+
+body{
+/*  background-color:#FAFAE6;*/
+  background-color:rgb(178,207,81);
+  margin:0% 0%;
+  padding : 0.9em;
+  font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
+  font-size:normal;
+}
+#page {
+    width: 100%;
+  background-color:#FAFAE6;
+  border : 2px solid black;
+  padding : 3px;
+}
+
+header{
+    background-color: rgb(236,255,162); /*#FFF0E6;*/
+    border: solid 2px rgb(178,207,81);
+    height: 105px;
+    padding: 2px;
+    border-collapse: separate;
+}
+footer{
+    clear : both;
+    border : solid 2px rgb(178,207,81);
+    margin-left : 200px;
+    margin-top : 10px;
+    padding:5px;
+/*	height: 50px;*/
+    padding: 2px;
+    border-collapse: separate;
+}
+nav#menuGauche {
+    box-shadow: 20px 21px 12px 0px #522222;
+    margin-top : 10px;
+    padding: 10px;
+    background-color: #ff9933;
+    color: #000;
+    flex-direction: row;
+/*	width: 180px;*/
+    width: 100%;
+    height: 5%;
+    position : fixed;
+    border : solid 2px rgb(178,207,81);
+    border-radius :33px;
+}
+nav ul{
+    flex-direction: row;
+}
+#contenu{
+    font-size:normal;
+    border: none;
+    padding: 10px 0px 10px 10px;
+    /*background-color: whitesmoke; #FFF0E6;*/
+    margin-top : 10px;
+    margin-left: 0%;
+    width: 100%;
+/* permet de fixer une hauteur mini sur les navigateurs modernes */
+    min-height:27em;
+/* pour obtenir le même effet sur IE, sachant que si le contenu dépasse, il
+"poussera" la hauteur en ne respectant pas la norme. On se joue de ses lacunes
+*/
+    height:27em;
+}
+
+/* pour rétablir le mauvais effet sur les nav. modernes */
+html>body #contenu{
+  height:auto;
+}
+
+
+
+header h1 {
+  margin : 1em;
+  margin-left:6em;
+  font-size : xx-large;
+  text-align:center;
+}
+
+#contenu h2 {
+  font-size : large;
+  text-align:left;
+  margin:0;
+  margin-bottom:0.5em;
+}
+
+#infosUtil h2 {
+  font-size:medium;
+  color:gray;
+  font-weight:normal;
+  border-color : rgb(178,207,81);
+  border-style : solid;
+  border-width : 0 0 3px 0 ;
+}
+.logoValidW3c {
+  display: inline;
+}
+#libValidW3c{
+  display : inline;
+  vertical-align:middle;
+}
+
+#logoRss{
+  border-width : 0px;
+}
+/* Style des formulaires */
+fieldset {/*border-radius: 10px;*/
+border : solid black 1px;
+background-color: white;}
+
+#corpsForm {
+  border : solid 2px #000;
+  border-bottom-width:1px;
+  /*width : 95%;*/
+}
+#divTable {/*Vincent*/
+  border: solid 1px #000;
+  border-top-width:1px;
+  text-align:left;
+  width : 95%;
+}
+#piedForm {
+  border: solid 2px #000;
+  border-top-width:1px;
+  text-align:right ;
+  width : 95%;
+ /*padding-left:23%;*/
+}
+
+
+
+/*couleur des balises legend*/
+legend{
+  background-color:#ff3366;
+}
+
+form {
+  margin-bottom:1em;  
+}
+#corpsForm legend {
+  font-weight:bold;
+  font-size:1.2em;
+}
+/*#corpsForm label{
+  .float: left;
+  text-align:right;
+  width:15%;
+	margin: auto;
+	padding: 0 .5em 0 0;
+	line-height: 1.8;	
+}*/
+input, textarea, select{
+  font-family:"Trebuchet MS", sans-serif;
+  font-size : 1em;
+  outline: none;
+  border: none;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #c9c9c9;
+  background-color: white;
+}
+/*input[type=submit], input[type=reset]{
+  width : 6em;
+  height : 3em;
+  text-align:center;
+  vertical-align:middle;
+  text-transform: uppercase;
+}*/
+textarea:hover, select:hover{
+  background-color : #FAFAE6;
+  cursor : pointer;
+}
+
+/*  Le texte des messages d'erreur est de couleur rose sur fond ocre et de 
+taille de caractères légèrement supérieure à la normale */
+.msgErreur{ 
+   background-color:rgb(237,210,229);
+   color:rgb(203,28,128);
+   font-size:1.1em;
+   width:100%;
+   border-radius: 25px;
+   top: 100px;
+}
+.centre {
+  text-align:center;
+}
+
+.info {
+   background-color:rgb(178,207,81);
+   color : white;
+   font-size:1.1em;
+   width : 95%  
+}
+
+/* Style pour les liens de la page principale */
+#contenu a {
+   font-size : 1.1em;
+   color:gray;
+   text-decoration:none;
+}
+#contenu a:hover {
+   text-decoration:underline;
+}
+
+/* Style pour les parties importantes de la page principale */
+#contenu strong {
+  font-weight:bold;
+}
+
+/* Styles pour les tableaux de la page principale */
+#contenu table {
+   background-color:white;
+   border :1px solid #777777;
+   color:black;
+   margin-right : auto ;
+   margin-left: auto;
+   border-collapse : collapse;
+   border-radius: 12px
+   
+}
+
+
+
+/* Style pour les lignes d'en-tête des tableaux */
+#contenu th {  
+   background-color: #FF3366;
+   height:21px;
+   text-align:center;
+   border-bottom:1px solid #777777;
+   vertical-align: middle; 
+   border: black solid 1px; 
+   border-collapse: collapse;
+   
+} 
+
+/* Tableaux quadrillés utilisés pour l'affichage de listes */ 
+table.tabQuadrille th, table.tabQuadrille td {
+  border : dotted white 1px;
+  padding:px;
+  vertical-align : top;
+}
+/*table.tabQuadrille th {
+  font-style:normal;
+  font-size:1.1em;
+  padding-left:12px;
+}*/
+
+/*#search {
+	background-image: url(img/moteurLoupe.png);
+	background-repeat: no-repeat;
+}*/
+
+/* Tableaux non quadrillés utilisés pour l'affichage de fiches */ 
+table.tabNonQuadrille{
+width: 26%; margin: 2%; border: none; background-color: #F5F5F5;  margin-bottom:0.5em; border-radius: 10px
+}
+
+/* Style pour les cellules des tableaux non quadrillés */
+table.tabNonQuadrille td {
+   background-color:white;
+   height:1.5em;
+   text-align:left;
+   padding-left:6px;
+   margin: 10px;
+   padding-right:6px;
+} 
+
+td.libelle{
+  width:50%;
+  color:black;
+  vertical-align:top;
+  font-weight:bold;
+  margin: 5px;
+}
+
+/*
+td.libelleADroite{
+  width:7%;
+  color:black;
+  vertical-align:top;
+  font-weight:bold;
+}
+*/
+#contenu .corpsTexte {
+  width:100%;
+  font-size:1.1em;
+}
+/*vincent*/
+.button
+{ 
+  background: transparent;
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.button1
+{ 
+  background: transparent;
+  display: none;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 98;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+
+.button:focus{
+  outline:0!important;
+}
+.button:hover{
+  transform: scale(1.2);
+}
+
+.button1:focus{
+  outline:0!important;
+}
+.button1:hover{
+  transform: scale(1.2);
+}
+
+input[class=mailBox]
+{
+  -ms-transform: scale(1.2); /* IE */
+  -moz-transform: scale(1.2); /* FF */
+  -webkit-transform: scale(1.2); /* SI & GC */
+  transform: scale(1.2);
+  
+  /*position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;*/
+}
+
+
+
+#introMail{
+  position: absolute;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+}
+
+
+.topnav input[type=text] {
+  padding: 14px;
+  margin-top: 8px;
+  margin-left: 30px;
+  font-size: 17px;
+  width:300px;
+  border: none;
+  outline: none;
+  border-bottom-left-radius:25px;
+  border-top-left-radius:25px
+}
+/*loupe*/
+.topnav button {
+  float: right;
+  padding: 14px 18px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  outline:none!important;
+}
+
+/*.topnav .search-container button:hover {
+  background: #ccc;
+}*/
+
+
+
+/*Partie connexion*/
+#connexion{
+  overflow: hidden;
+  text-align: center;
+  margin: 0 auto;
+  margin-top:100px;
+  width: 100%;
+}
+
+.connexion{
+  padding: 10px;
+  border-radius: 25px;
+  background-color: #e8f0fe;
+  
+}
+
+.connexion:focus{
+  border-color: gray;
+}
+
+#ok {
+  color: white;
+  width: 200px;
+  border: none;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 1px;
+  background-color: #149dcc;
+  font-family:"Trebuchet MS", sans-serif;
+  font-size: 1em;
+}
+
+#ok:hover{
+  background-color: #0d6786;
+}
+
+#globale{
+  overflow:hidden;
+  text-align: center;
+}
+
+
+/*table{
+  text-align:center; 
+  vertical-align:middle;
+}*/
+
+#navbarSupportedContent{
+  margin-left : 30%;
+  position:fixed;
+}
+
+
+
+/*affichage colonnes*/
+.deroule {
+  position: relative;
+  display: inline-block;
+}
+
+.deroule-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+  padding: 12px 16px;
+  z-index: 1;
+  width:1200px;
+  border-style:solid;
+  border-width:3px;
+}
+
+.deroule:hover .deroule-content {
+  display: block;
+}
+
+.revert:hover{
+  background-color:#b3b3b3;
+}
+
+
+
+
+/*CHECKBOX*/
+
+
+
+.container {
+  position: relative;
+  cursor: pointer;
+  font-size: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-bottom: 0;
+  vertical-align: middle;
+  padding-left:35px!important;
+}
+
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #cccccc;
+  /*margin-top:4px;*/
+}
+
+
+.container:hover input ~ .checkmark {
+  background-color: #b3b3b3;
+}
+
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+/*RADIO BUTON*/
+
+
+/* The container */
+.container1 {
+  /*display: block;*/
+  position: relative;
+  padding-left: 35px!important;
+  /*margin-bottom: 12px;*/
+  cursor: pointer;
+  font-size: normal;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+}
+
+/* Hide the browser's default radio button */
+.container1 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #cccccc;
+  border-radius: 50%;
+ /* margin-top:2.5px;*/
+}
+
+/* On mouse-over, add a grey background color */
+.container1:hover input ~ .checkmark1 {
+  background-color: #b3b3b3;
+}
+
+/* When the radio button is checked, add a blue background */
+.container1 input:checked ~ .checkmark1 {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark1:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container1 input:checked ~ .checkmark1:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container1 .checkmark1:after {
+ 	top: 9px;
+	left: 9px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: white;
+}
+
+/*general radio btn*/
+
+input[type="radio"]{
+  vertical-align: middle!important;
+}
+
+input[type="checkbox"]{
+  vertical-align:middle!important;
+}
+
+.alignText{
+  vertical-align:middle;
+  text-align:center;
+}
+
+/* AFFICHAGE ET MISE EN FORME DESDIFFERENTS TYPES DE PAGES */
+
+.formPages{
+  margin-left: 10px;
+}
+
+.staticPages{
+  overflow: hidden;
+}
+
+
+/* FIN */
+
+a.sideButton{
+  margin: .4rem .0rem!important;
+}
+
+a.textCenter{
+  text-align:center!important;
+  vertical-align:middle!important;
+}
+
+.divCenter{
+  text-align:center;
+}
+
+.stickyBtn{
+  position: fixed;
+  bottom:20px;
+}
+
+#ajouterBtn{
+  position:fixed;
+  right:10px;
+  bottom:10px;
+  background-color:#FF3366;
+  width:150px;
+  border-style:solid;
+  border-width:2px;
+  border-color:black;
+  border-radius:10px;
+  color:white;
+}
+
+#ajouterBtn:hover{
+  background-color:#990026;
+}
+
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 50vh;
+}
+.lescol {
+  width: 1000px;
+}
+
+.retour {
+  background-color:#777777!important;
+}
+
+.valider {
+  background-color: #FF3366!important;
+}
+
