@@ -973,7 +973,7 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
     ou individuel en fonction de $num
     */ 
     public function listeEntretiensGlobal($num){
-        $req="SELECT titre_Candidats, nom_Candidats, prenom_Candidats, `date`, commentaire FROM candidats
+        $req="SELECT intervenants.numSalarie_Intervenants, titre_Candidats, nom_Candidats, prenom_Candidats, `date`, commentaire FROM candidats
         JOIN intervenants
         ON intervenants.candidats_numcandidat_candidats = candidats.numCandidat_Candidats
         JOIN entretiens

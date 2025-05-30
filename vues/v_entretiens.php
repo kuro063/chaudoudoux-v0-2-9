@@ -15,7 +15,8 @@
         <?php foreach($entretien as $dataEntretien){ ?>
           <tr>
             <td class="nom_col"><?php echo $dataEntretien['titre_Candidats'];?></td>
-            <td class="nom_col"><?php echo $dataEntretien['nom_Candidats'];?></td>
+            <td class="nom_col" ><a href="index.php?uc=annuSalarie&amp;action=voirDetailSalarie&amp;num=<?php echo $dataEntretien['numSalarie_Intervenants']; ?>">
+              <?php echo $dataEntretien['nom_Candidats'];?></a></td>
             <td class="nom_col"><?php echo $dataEntretien['prenom_Candidats'];?></td>
             <td class="nom_col"><?php echo $dataEntretien['date'];?></td>
             <td class="nom_col"><?php echo $dataEntretien['commentaire'];?></td>
