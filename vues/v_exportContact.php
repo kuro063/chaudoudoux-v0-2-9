@@ -2,6 +2,66 @@
   <head>
     <meta charset="utf-8">
     <title>Exporter les contacts</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>More actions
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.2.3/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.html5.min.js"></script>
+
+    <script src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.3/css/buttons.dataTables.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script type="text/javascript"> 
+      $(document).ready(function() {
+        $('#contactFamille').DataTable({
+          'scrollY':475,
+          layout: {
+            topStart: {
+              pageLength: {
+                menu: [10, 25, 50, -1]
+              }, 
+              buttons:[{
+                extend: 'csvHtml5',
+                text: 'Exporter en csv',
+                title: 'Contact_Intervenant',
+                fieldSeparator: ',',
+                bom: true,
+                exportOptions: {
+                  modifier: {
+                    page: 'current'
+                  }
+                }
+              }]
+            }
+          }
+        });
+        $('#contactIntervenant').DataTable({
+          'scrollY':420,
+          layout: {
+            topStart: {
+              pageLength: {
+                menu: [10, 25, 50, -1]
+              }, 
+              buttons:[{
+                extend: 'csvHtml5',
+                text: 'Exporter en csv',
+                title: 'Contact_Intervenant',
+                fieldSeparator: ',',
+                bom: true,
+                exportOptions: {
+                  modifier: {
+                    page: 'current'
+                  }
+                }
+              }]
+            }
+           }
+        });
+      })
+    </script>
   </head>
   <body>
     <div id="contenu">
