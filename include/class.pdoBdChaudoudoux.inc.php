@@ -975,7 +975,7 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
     public function listeEntretiensGlobal($num){
         $req="SELECT titre_Candidats, nom_Candidats, prenom_Candidats, `date`, commentaire FROM candidats
         JOIN intervenants
-        ON intervenants.candidats_cumcandidat_candidats = candidats.numCandidat_Candidats
+        ON intervenants.candidats_numcandidat_candidats = candidats.numCandidat_Candidats
         JOIN entretiens
         ON intervenants.numSalarie_Intervenants = entretiens.numSalarie_Intervenants
         WHERE pro = :num ORDER BY `date` DESC";
