@@ -1004,6 +1004,13 @@ else  {
                         include("vues/v_detailCandidat.php");
                     }
                     break;
+
+        case 'introEntretien':
+            include('vues/v_entretienIntro.php');
+            break;
+
+        
+
         case 'mailIntervPrest':
             $adressesPrest = $pdoChaudoudoux->mailPrestInterv();
             $nbAdresse = count($pdoChaudoudoux->mailPrestInterv());
