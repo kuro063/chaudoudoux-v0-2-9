@@ -11,6 +11,13 @@ switch($action) {
 		include("vues/v_accueil.php");
 		break;
 
+		case 'exportIntro':
+			include("vues/v_exportIntro.php");
+			break;
+
+		case 'exportContact':
+			break;
+
         default :
 		include("vues/v_accueil.php");
 		break;	
