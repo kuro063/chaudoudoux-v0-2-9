@@ -58,6 +58,29 @@
         }
       }
     })();
+    (async () => {
+      const tab = document.querySelectorAll("#historiqueInterv")[0];
+      if (!tab) {
+        return;
+      }
+      console.log(tab)
+      for (const line of tab.rows) {
+        if (!line.querySelector("th")) {
+          console.log(line.querySelectorAll("td"))
+          const addr_can = line.querySelectorAll("td")[0].textContent.trim();
+          const addr_fam = line.querySelectorAll("td")[1].textContent.trim();
+          const addr_chau = "22 rue jean Guéhenno, 35700, Rennes";
+          const dist_can_fam = line.querySelectorAll("td")[10];
+          const dist_chau_fam = line.querySelectorAll("td")[11];
+          if (dist_can_fam && dist_chau_fam) {
+
+            dist_can_fam.textContent = await getDistance(addr_can, addr_fam) + " Km";
+            dist_chau_fam.textContent = await getDistance(addr_chau, addr_fam) + " Km";
+
+          }
+        }
+      }
+    })();
   </script>
 
 <!-- Division pour le contenu principal -->
@@ -445,10 +468,12 @@
        {?>
         <h2>Historique des interventions</h2>
                
-      <table class="sortable zebre" id="listeInterv">
+      <table class="sortable zebre" id="historiqueInterv">
           <thead> 
             <tr class="btn-secondary">
             <?php if (lireDonneeUrl('num')!=99999){?>
+              <th style="display: none;">addr_fam</th>
+              <th style="display: none;">addr_can</th>
               <th>Numéro du salarié</th>
               <th>Nom du Salarié</th>
               <th>Nom de jeune fille</th><?php }?>
@@ -457,15 +482,29 @@
               <th>Date de début</th>
               <th>Date de fin</th>
               <th>Jour / horaires / modalités</th>
+              <th>distance Interv-Famille</th>
+              <th>distance Chaudoudoux-Famille</th>
               <th>Modifier</th>
               </tr>
             </thead>
           <tbody>
           <?php $i=0;
-        foreach ($lesIntervPasse as $uneIntervPasse)
-        { $numFam= $uneIntervPasse['numero_Famille'];
-            if ($numFam!=9999){
-            $numSal= $uneIntervPasse['numSalarie_Intervenants'];
+        foreach ($lesIntervPasse as $uneIntervPasse){ 
+          $numFam = $uneIntervPasse['numero_Famille'];
+          if ($numFam!=9999){
+            $numSal = $uneIntervPasse['numSalarie_Intervenants'];
+            $infoInterv = $pdoChaudoudoux->obtenirDetailsSalarie($numSal);
+            $addrInterv = 
+            (!isset($infoInterv[0]['adresse_Candidats']) || is_bool($infoInterv[0]['adresse_Candidats']) ? '' : $infoInterv[0]['adresse_Candidats']) . ' ' . 
+            (!isset($infoInterv[0]['cp_Candidats']) || is_bool($infoInterv[0]['cp_Candidats']) ? '' : $infoInterv[0]['cp_Candidats']) . ' ' . 
+            (!isset($infoInterv[0]['ville_Candidats']) || is_bool($infoInterv[0]['ville_Candidats']) ? '' : $infoInterv[0]['ville_Candidats']);
+
+            $infoFamille = $pdoChaudoudoux->obtenirDetailFamille($numFam);
+            $addrFamille = 
+            (!isset($infoFamille['adresse_Famille']) || is_bool($infoFamille['adresse_Famille']) ? '' : $infoFamille['adresse_Famille']) . ' ' . 
+            (!isset($infoFamille['cp_Famille']) || is_bool($infoFamille['cp_Famille']) ? '' : $infoFamille['cp_Famille']) . ' ' . 
+            (!isset($infoFamille['ville_Famille']) || is_bool($infoFamille['ville_Famille']) ? '' : $infoFamille['ville_Famille']);
+
             
             $nomSal=$uneIntervPasse['nom_Candidats'];
             $nomJF=$uneIntervPasse['nomJF_Candidats'];
@@ -499,13 +538,20 @@
             $i++;
             $hDeburl= substr($hDeb,0,2).substr($hDeb,3,2).substr($hDeb,6,2);
             $hFinurl= substr($hFin,0,2).substr($hFin,3,2).substr($hFin,6,2);
-             $dateDeburl= substr($dateDeb, 0,4).substr($dateDeb,5,2).substr(8,2);
-            echo '<td>'.$idSal.'</td><td><a href="index.php?uc=annuSalarie&action=voirDetailSalarie&num='.$numSal.'">'.$nomSal.'</a></td><td>'.$nomJF.'</td><td><a href="index.php?uc=annuFamille&action=voirDetailFamille&num='.$numFam.'">'.$nomFam.'</a></td><td>';
-            
-            echo $presta." ".$libelleADH;
-            echo '</td><td>'.$dateDebstring.'</td><td>'.$dateFinstring.'</td><td>';
-            echo $jour.' '.$hDeb.'-'.$hFin.'<br/>'.$modalites; 
-            echo '</td></tr>';
+            $dateDeburl= substr($dateDeb, 0,4).substr($dateDeb,5,2).substr(8,2);
+            echo '<tr>';
+              echo '<td style="display: none;">'.$addrInterv.'</td>
+                    <td style="display: none;">'.$addrFamille.'</td>';
+              echo '<td>'.$idSal.'</td>
+                    <td><a href="index.php?uc=annuSalarie&action=voirDetailSalarie&num='.$numSal.'">'.$nomSal.'</a></td>
+                    <td>'.$nomJF.'</td>
+                    <td><a href="index.php?uc=annuFamille&action=voirDetailFamille&num='.$numFam.'">'.$nomFam.'</a></td><td>';
+                    echo $presta." ".$libelleADH;
+                    echo '</td><td>'.$dateDebstring.'</td><td>'.$dateFinstring.'</td><td>';
+                    echo $jour.' '.$hDeb.'-'.$hFin.'<br/>'.$modalites; 
+                    echo '</td><td style="border-left: solid black 1px;border-right: solid black 1px; border-collapse : collapse"><img style="max-width:30px;" src="./styles/img/loading.gif"></img></td>';
+                    echo '</td><td style="border-left: solid black 1px;border-right: solid black 1px; border-collapse : collapse"><img style="max-width:30px;" src="./styles/img/loading.gif"></img></td>';
+            echo '</tr>';
             }
         }  ?>
         
