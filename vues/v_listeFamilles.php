@@ -188,7 +188,7 @@ document.getElementById(col_name).value="hide";*/-->
 <a class="btn btn-secondary display-4 sideButton" style="float:right;position:absolute;right:10px" href="index.php?uc=search&amp;action=advSearchF">RECHERCHE AVANCÉE</a>
 <!--Liste des cases à cocher pour afficher ou cacher les colonnes du tableau-->
 <div class="deroule">
-<span><h2 class="revert dropdown-toggle" style="cursor:pointer;padding:10px;border-style:solid;border-width:2px;text-align:center;border-color:#4d4d4d;align:center">AFFICHAGE COLONNES</h2></span>
+<span><h2 class="revert dropdown-toggle" style="cursor:pointer;padding:10px;border-style:solid;border-width:2px;text-align:center;border-color:#4d4d4d">AFFICHAGE COLONNES</h2></span>
 <div class="deroule-content" style="column-count: 4">
 <!--35 ligne pour un tableau de familles entier en regroupant tous ceux de l'application-->
 
