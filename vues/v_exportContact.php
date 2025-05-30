@@ -59,6 +59,44 @@
               <?php }?>
             </tbody>
             </div>  
+        
+           <?php } else { ?>
+          <h3 style="text-align: center">Exporter les contacts intervenants</h3>
+          <div style="margin-right:100px; margin-left:100px">
+          <table class="zebre" id="contactIntervenant">
+            <thead> 
+              <tr class="btn-secondary">
+              <th>First Name</th>
+                <th>E-mail</th>
+                <th>Phone</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>Postal Code</th>
+                <th>Organization</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($lesSalaries as $unSalarie){ 
+                      $nomSal = $unSalarie[3].' '.$unSalarie[4];
+                      $mailSal = $unSalarie[21];
+                      $telSal = $unSalarie[18];
+                      $rueSal = $unSalarie[13];
+                      $codePostalSal = $unSalarie[14];
+                      $villeSal = $unSalarie[15];
+                      $prestMandSal = $unSalarie[56].' '.$unSalarie[57];
+              ?>
+              <tr>
+                 <td class="nom_col"><?php echo 'Intervenante ', $nomSal;?></td>
+                <td class="nom_col"><?php echo $mailSal;?></td>
+                <td class="nom_col"><?php echo $telSal;?></td>
+                <td class="nom_col"><?php echo $rueSal;?></td>
+                <td class="nom_col"><?php echo $villeSal;?></td>
+                <td class="nom_col"><?php echo $codePostalSal;?></td>
+                <td class="nom_col"><?php echo 'Famille(s): ', $prestMandSal;?></td>
+              </tr>
+              <?php }?>
+            </tbody>
+            </div>
         <?php }?>
       <?php }?>
     </div>
