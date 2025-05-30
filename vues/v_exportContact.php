@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8">
     <title>Exporter les contacts</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>More actions
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.1/css/dataTables.dataTables.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
 
