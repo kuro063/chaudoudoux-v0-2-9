@@ -328,6 +328,8 @@ if ($pageActuelle != 'planning.php') {
                   
                   <a class="text-white dropdown-item display-4" href="index.php?uc=annuSalarie&amp;action=introEntretien"
                     aria-expanded="false">Entretien</a>
+                  <a class="text-white dropdown-item display-4" href="index.php?uc=informations&amp;action=exportIntro"
+                  aria-expanded="false">Exporter Contact</a> 
 
                   <a class="text-white dropdown-item display-4"
                     href="index.php?uc=annuFact&amp;action=voirTousFact&amp;ordre=alpha">Aide à la facturation<br></a>

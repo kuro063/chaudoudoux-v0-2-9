@@ -2453,7 +2453,7 @@ $cmd = $this->monPdo->prepare($req);
         $req="SELECT distinct telPortable_Parents as telMaman from parents where numero_Famille=:num limit 1";
         $cmd = $this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
-	$cmd->execute();
+	    $cmd->execute();
         $res = $cmd->fetch();
         $res=$res['telMaman'];
         $cmd->closeCursor();
@@ -2467,6 +2467,11 @@ $cmd = $this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
 	    $cmd->execute();
         $res = $cmd->fetch();
+        if ($res === false) {
+        // Si la requête n'a pas renvoyé de résultats (fetch() retourne false)
+        $cmd->closeCursor();
+        return null;  // Retourner null si aucun résultat
+        }
         $res=$res['telPapa'];
         $cmd->closeCursor();
         return $res;
