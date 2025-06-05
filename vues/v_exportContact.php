@@ -98,7 +98,7 @@
                       $enPostePrestGE = $pdoChaudoudoux->obtenirSalariePrestGEPresent($num);
               ?>
               <tr>
-                <td class="nom_col"><a href="index.php?uc=annuFamille&amp;action=voirDetailFamille&amp;num=<?php echo $num; ?>"> <?php echo 'Famille ', $noms;?></a></td>
+                <td class="nom_col"><a href="index.php?uc=annuFamille&amp;action=voirDetailFamille&amp;num=<?php echo $num; ?>"> <?php echo 'CDX FAM ', $noms;?></a></td>
                 <td class="nom_col"><?php echo $mailMaman;?></td>
                 <td class="nom_col"><?php echo $mailPapa;?></td>
                 <td class="nom_col"><?php echo $telMaman;?></td>
@@ -106,7 +106,7 @@
                 <td class="nom_col"><?php echo $coord['adresse_Famille'];?></td>
                 <td class="nom_col"><?php echo $coord['ville_Famille'];?></td>
                 <td class="nom_col"><?php echo $coord['cp_Famille'];?></td>
-                <td class="nom_col"><?php echo 'Intervenante(s): '; ?><?php $enPostePrestMenage = $pdoChaudoudoux->obtenirSalariePrestMenagePresent($num);
+                <td class="nom_col"><?php echo 'CDX INT '; ?><?php $enPostePrestMenage = $pdoChaudoudoux->obtenirSalariePrestMenagePresent($num);
                 foreach ($enPostePrestMenage as $unIntervPrestMenage){
                   echo $unIntervPrestMenage['nom_Candidats'].' '.$unIntervPrestMenage['prenom_Candidats'].' ';}?>
                 <?php  $enPostePrestGE = $pdoChaudoudoux->obtenirSalariePrestGEPresent($num);
@@ -146,13 +146,13 @@
                       $prestMandSal = $unSalarie[56].' '.$unSalarie[57];
               ?>
               <tr>
-                 <td class="nom_col"><?php echo 'Intervenante ', $nomSal;?></td>
+                <td class="nom_col"><?php echo 'CDX INT ', $nomSal;?></td>
                 <td class="nom_col"><?php echo $mailSal;?></td>
                 <td class="nom_col"><?php echo $telSal;?></td>
                 <td class="nom_col"><?php echo $rueSal;?></td>
                 <td class="nom_col"><?php echo $villeSal;?></td>
                 <td class="nom_col"><?php echo $codePostalSal;?></td>
-                <td class="nom_col"><?php echo 'Famille(s): ', $prestMandSal;?></td>
+                <td class="nom_col"><?php echo 'CDX FAM ', $prestMandSal;?></td>
               </tr>
               <?php }?>
             </tbody>
