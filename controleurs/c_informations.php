@@ -16,7 +16,14 @@ switch($action) {
 			break;
 
 		case 'exportContact':
-			$lesFamilles=$pdoChaudoudoux->obtenirListeFamille();
+			if(lireDonneeUrl('type') == 'famille'){
+				if(lireDonneeUrl(('registre') == 'nonArchive')){
+					$lesFamilles=$pdoChaudoudoux->obtenirListeFamille();
+				}
+				else {
+					$lesFamilles=$pdoChaudoudoux->obtenirListeFamilleArchive();
+				}
+			}
 
 			//Récupérer les noms des colonnes constituant les tables intervenants et salarié
 			$lesChamps=$pdoChaudoudoux->obtenirListeChampI();
@@ -38,7 +45,16 @@ switch($action) {
 			
 			/*Récupère la liste des intervenants placés et leurs informations correspondants 
 			aux colonnes récupérer dans $quoi.*/
-			$lesSalaries=$pdoChaudoudoux->obtenirListeSalariePlace($quoi);
+			$lesSalaries = array();
+			
+			if(lireDonneeUrl('type') == 'intervenant'){
+				if(lireDonneeUrl('registre') == 'nonArchive'){
+					$lesSalaries=$pdoChaudoudoux->obtenirListeSalariePlace($quoi);
+				}
+				else{
+					$lesSalaries=$pdoChaudoudoux->obtenirListeSalarieArchiveTous($quoi);
+				}
+			}
 
 			for ($i = 0; $i != count($lesSalaries); $i++) {
 				$chezMAND = "";

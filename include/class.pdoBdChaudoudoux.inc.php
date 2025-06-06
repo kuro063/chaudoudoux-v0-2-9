@@ -463,6 +463,15 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
         $cmd->closeCursor();
         return $lignes;        
     }
+
+    public function obtenirListeSalarieArchiveTous($quoi){
+        $req = "SELECT ".$quoi." from candidats as C join intervenants as I on I.candidats_numcandidat_candidats=C.numCandidat_Candidats where I.archive_Intervenants=1 GROUP BY C.numCandidat_Candidats ORDER BY C.nom_Candidats ASC" ;
+        $cmd = $this->monPdo->prepare($req);
+        $cmd->execute();
+        $lignes = $cmd->fetchAll(PDO::FETCH_NUM);
+        $cmd->closeCursor();
+        return $lignes;        
+    }
     /*menage*/
      public function obtenirListeSalarieMenage($quoi){
         $req = "SELECT ".$quoi." from candidats as C join intervenants as I on I.candidats_numcandidat_candidats=C.numCandidat_Candidats join proposer as P on P.numSalarie_Intervenants=I.numSalarie_Intervenants where I.archive_Intervenants=0 and I.numSalarie_Intervenants in (SELECT numSalarie_Intervenants from proposer where idPresta_Prestations='MENA' and (dateFin_Proposer<date(now()) or dateFin_Proposer<>'0000-00-00')) and TravailVoulu_Candidats NOT LIKE 'ENFANT' GROUP BY C.numCandidat_Candidats ORDER BY C.nom_Candidats ASC" ;
