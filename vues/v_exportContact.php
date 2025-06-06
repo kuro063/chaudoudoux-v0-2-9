@@ -26,7 +26,7 @@
               buttons:[{
                 extend: 'csvHtml5',
                 text: 'Exporter en csv',
-                title: 'Contact_Intervenant',
+                title: 'Contact_Famille',
                 fieldSeparator: ',',
                 bom: true,
                 exportOptions: {
