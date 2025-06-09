@@ -231,7 +231,7 @@ if(lireDonneeUrl("action")=="creationEmailPrefabMenage" || lireDonneeUrl("action
 
                 <h3><strong> Sujet du mail : </strong></h3> <br/>
             
-                <p>CHAUDOUDOUX : <?php echo $texteTitreParents; ?> <?php  echo $nomFamille ?> : INTERVENANT<?php echo $SujetMail; echo $texteTitreSalarie?> <?php echo $nomSalarie ?> <?php echo strtoupper($prenomSalarie); ?> POUR VOTRE DEMANDE DE PRESTATION MENAGE </p> <br/>
+                <p>CHAUDOUDOUX : <?php echo $texteTitreParents; ?> <?php  echo $nomFamille ?> : INTERVENANT<?php echo $SujetMail; echo $texteTitreSalarie?> <?php echo $nomSalarie ?> <?php echo mb_strtoupper($prenomSalarie); ?> POUR VOTRE DEMANDE DE PRESTATION MENAGE </p> <br/>
 
                 <h3><strong>Corps du mail : </strong></h3>
                 <br/>
@@ -272,7 +272,7 @@ if(lireDonneeUrl("action")=="creationEmailPrefabMenage" || lireDonneeUrl("action
 
                 <h3><strong> Sujet du mail : </strong></h3> <br/>
 
-                <p>CHAUDOUDOUX : <?php echo $texteTitreParents; ?> <?php  echo $nomFamille ?> : INTERVENANT<?php echo $SujetMail; echo $texteTitreSalarie?> <?php echo $texteTitreSalarie?> <?php echo $nomSalarie ?> <?php echo strtoupper($prenomSalarie); ?> POUR VOTRE DEMANDE DE GARDE D'ENFANTS </p> <br/>
+                <p>CHAUDOUDOUX : <?php echo $texteTitreParents; ?> <?php  echo $nomFamille ?> : INTERVENANT<?php echo $SujetMail?> <?php echo $texteTitreSalarie?> <?php echo $nomSalarie ?> <?php echo mb_strtoupper($prenomSalarie); ?> POUR VOTRE DEMANDE DE GARDE D'ENFANTS </p> <br/>
 
                 <h3><strong>Corps du mail : </strong></h3>
                 <br/>
