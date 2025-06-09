@@ -26,7 +26,7 @@
               buttons:[{
                 extend: 'csvHtml5',
                 text: 'Exporter en csv',
-                title: 'Contact_Famille',
+                title: <?php if (lireDonneeUrl('registre') == 'nonArchive'){?>'Contact_Famille'<?php } else{?>'Contact_Famille_Archive'<?php }?>,
                 fieldSeparator: ',',
                 bom: true,
                 exportOptions: {
@@ -48,7 +48,7 @@
               buttons:[{
                 extend: 'csvHtml5',
                 text: 'Exporter en csv',
-                title: 'Contact_Intervenant',
+                title: <?php if (lireDonneeUrl('registre') == 'nonArchive'){?>'Contact_Intervenant'<?php } else{?>'Contact_Intervenant_Archive'<?php }?>,
                 fieldSeparator: ',',
                 bom: true,
                 exportOptions: {
