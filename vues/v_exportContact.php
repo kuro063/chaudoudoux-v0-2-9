@@ -26,7 +26,7 @@
               buttons:[{
                 extend: 'csvHtml5',
                 text: 'Exporter en csv',
-                title: 'Contact_Intervenant',
+                title: <?php if (lireDonneeUrl('registre') == 'nonArchive'){?>'Contact_Famille'<?php } else{?>'Contact_Famille_Archive'<?php }?>,
                 fieldSeparator: ',',
                 bom: true,
                 exportOptions: {
@@ -48,7 +48,7 @@
               buttons:[{
                 extend: 'csvHtml5',
                 text: 'Exporter en csv',
-                title: 'Contact_Intervenant',
+                title: <?php if (lireDonneeUrl('registre') == 'nonArchive'){?>'Contact_Intervenant'<?php } else{?>'Contact_Intervenant_Archive'<?php }?>,
                 fieldSeparator: ',',
                 bom: true,
                 exportOptions: {
@@ -67,7 +67,7 @@
     <div id="contenu">
       <?php if(lireDonneeUrl('uc') == 'information'){?>
         <?php if(lireDonneeUrl('type') == 'famille'){?>
-          <h3 style="text-align: center">Exporter les contacts familles</h3>
+          <h3 style="text-align: center"><?php if (lireDonneeUrl('registre') == 'nonArchive'){?>Exporter les contacts familles<?php } else{?>Exporter les contacts familles archivées<?php }?></h3>
           <div style="margin-right:32px; margin-left:16px">
           <table class="zebre" id="contactFamille">
             <thead> 
@@ -121,7 +121,7 @@
             </div>  
         
            <?php } else { ?>
-          <h3 style="text-align: center">Exporter les contacts intervenants</h3>
+          <h3 style="text-align: center"><?php if (lireDonneeUrl('registre') == 'nonArchive'){?>Exporter les contacts intervenants<?php } else{?>Exporter les contacts intervenants archivées<?php }?></h3>
           <div style="margin-right:100px; margin-left:100px">
           <table class="zebre" id="contactIntervenant">
             <thead> 

@@ -16,8 +16,16 @@ switch($action) {
 			break;
 
 		case 'exportContact':
-			$lesFamilles=$pdoChaudoudoux->obtenirListeFamille();
+			if(lireDonneeUrl('type') == 'famille'){
+				if(lireDonneeUrl(('registre') == 'nonArchive')){
+					$lesFamilles=$pdoChaudoudoux->obtenirListeFamille();
+				}
+				else {
+					$lesFamilles=$pdoChaudoudoux->obtenirListeFamilleArchive();
+				}
+			}
 
+			//Récupérer les noms des colonnes constituant les tables intervenants et salarié
 			$lesChamps=$pdoChaudoudoux->obtenirListeChampI();
 			$quoi = " ";
 			foreach ($lesChamps as $unChamp) {
@@ -30,21 +38,43 @@ switch($action) {
 					}
 					$quoi .= " , ";
 			}
+			 /* contient nom des colonnes formater avec C. pour les colonnes contenant le mot Candidats 
+			 et I. pour les colonnes contenant Intervenants.*/
 			$quoi = substr($quoi, 0, -2);
 
-			//liste salariés
-			$lesSalaries=$pdoChaudoudoux->obtenirListeSalariePlace($quoi);
+			
+			/*Récupère la liste des intervenants placés et leurs informations correspondants 
+			aux colonnes récupérer dans $quoi.*/
+			$lesSalaries = array();
+			
+			if(lireDonneeUrl('type') == 'intervenant'){
+				if(lireDonneeUrl('registre') == 'nonArchive'){
+					$lesSalaries=$pdoChaudoudoux->obtenirListeSalariePlace($quoi);
+				}
+				else{
+					$lesSalaries=$pdoChaudoudoux->obtenirListeSalarieArchiveTous($quoi);
+				}
+			}
+
 			for ($i = 0; $i != count($lesSalaries); $i++) {
 				$chezMAND = "";
+				//récupère le numéro des familles associé aux intervenants mandataires
 				$famillesMAND = $pdoChaudoudoux->obtenirFamilleActuelleMAND($lesSalaries[$i][37]);
+
 				for ($o = 0; $o != count($famillesMAND); $o++) {
-						$chezMAND = $chezMAND . $pdoChaudoudoux->obtenirNomFamille($famillesMAND[$o]['numero_Famille']) . " / ";
+					//récupère le nom des familles associé aux intervenants mandataires
+					$chezMAND = $chezMAND . $pdoChaudoudoux->obtenirNomFamille($famillesMAND[$o]['numero_Famille']) . " / ";
 				}
 				$chezPREST = "";
+				//récupère le numéro des familles associé aux int prestataires
 				$famillesPREST = $pdoChaudoudoux->obtenirFamilleActuellePREST($lesSalaries[$i][37]);
+
 				for ($o = 0; $o != count($famillesPREST); $o++) {
-						$chezPREST = $chezPREST . $pdoChaudoudoux->obtenirNomFamille($famillesPREST[$o]['numero_Famille']) . " / ";
+					//récupère le nom des familles associé aux int prestataires 
+					$chezPREST = $chezPREST . $pdoChaudoudoux->obtenirNomFamille($famillesPREST[$o]['numero_Famille']) . " / ";
 				}
+				/* ajoute dans les noms de colonnes de chaque Intervenants le nom des familles 
+				dans lesquelles ils sont mandataire ou prestataire*/
 				array_push($lesSalaries[$i], $chezMAND);
 				array_push($lesSalaries[$i], $chezPREST);                 
       }
