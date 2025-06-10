@@ -400,7 +400,7 @@
             </tr>
        </table></div>
                <br/><div style="display:flex;flex-direction: column;">
-           <h5 style="font-size: 1.5em">Informations professionnelles</h5>
+           <h5 style="font-size: 1.5em; margin-left:40px">Informations professionnelles</h5>
            <table class="tabNonQuadrille" style="width:90%">
             
             <tr>
@@ -466,7 +466,7 @@
                   } ?></td>
             </tr>
            </table>
-           <h5 style="font-size: 1.5em">Formations suivies : </h5>
+           <h5 style="font-size: 1.5em; margin-left:40px;margin-top:20px">Formations suivies : </h5>
             <table class="tabNonQuadrille" style="width:90%">
                <?php if ($issalarie==true){ ?> <?php if (isset($lesF)) {foreach ($lesF as $unF)
                                   {
@@ -516,6 +516,30 @@
            ?>   <iframe frameborder="0" style="border:0; width: 30%;" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0Dx_boXQiwvdz8sJHoYeZNVTdoWONYkU&amp;q=<?php echo $adresse;?>" allowfullscreen=""></iframe>
             </div>
             </div>
+
+          <!-- TABLEAU DES RENDEZ-VOUS PRIS PAR L'INTERVENANT -->
+<div style="display:flex;flex-direction:column;margin-top:10px;margin-bottom:40px;table-layout:fixed;width:30%;">
+  <h5 style="font-size: 1.5em;margin-left:15px">entretiens :</h5>
+  <table style="border-collapse:collapse;width:60%;margin-left:15px;">
+    <tr>
+      <th style="border:1px solid black;text-align:left"><strong>Professionnel(s)</strong></th>
+      <?php foreach($lesEntretiens as $unEntretiens) {
+        if ($unEntretiens["pro"] == 1){ ?>  
+          <td><?php echo $unEntretiens["date"]?></td>
+      <?php }?>
+    <?php } ?> 
+    </tr>
+    <tr>
+      <th style="border:1px solid black;text-align:left;"><strong>Individuel(s)</strong></th>
+      <?php foreach($lesEntretiens as $unEntretiens) {
+        if ($unEntretiens["pro"] == 0){ ?>
+      <td><?php echo $unEntretiens["date"] ?></td>
+        <?php }?>
+      <?php } ?>
+    </tr>
+  </table>
+</div>
+
           <fieldset style="display: flex; flex-direction: column; width: 50%; margin-left:0%;">
           <legend><strong>DISPONIBILITES POUR LE MENAGE: </legend></p>
                     
