@@ -17,7 +17,7 @@ switch($action) {
 
 		case 'exportContact':
 			if(lireDonneeUrl('type') == 'famille'){
-				if(lireDonneeUrl(('registre') == 'nonArchive')){
+				if(lireDonneeUrl('registre') == 'nonArchive'){
 					$lesFamilles=$pdoChaudoudoux->obtenirListeFamille();
 				}
 				else {
