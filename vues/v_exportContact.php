@@ -232,12 +232,23 @@
                       if (substr($telMaman, 0, 1) === '0') {
                           $telMamanFr = '+33' . substr($telMaman, 1);
                       }
+                      /*
+                      Toujours initialiser $telMamanFr et $telPapaFr à chaque tour de boucle.
+                      Sinon, ils gardent la valeur précédente, ce qui donne des numéros incohérents.
+                       */
+                      else{
+                        $telMamanFr = $telMaman;
+                      }
 
                       $telPapa=$pdoChaudoudoux->obtenirTelPapa($num);
-                      $telPapa = str_replace('.', '', $telPapa);
-                      if (substr($telPapa, 0, 1) === '0') {
-                          $telPapaFr = '+33' . substr($telPapa, 1);
-                      }
+                        $telPapa = str_replace('.', '', $telPapa);
+                        if (substr($telPapa, 0, 1) === '0') {
+                            $telPapaFr = '+33' . substr($telPapa, 1);
+                        }
+                        else{
+                          $telPapaFr = $telPapa;
+                        }
+                      
 
                       $mailMaman=$pdoChaudoudoux->obtenirMailMaman($num);
                       $mailPapa=$pdoChaudoudoux->obtenirMailPapa($num);
@@ -291,6 +302,9 @@
                       $telSal = str_replace('.', '', $telSal);
                       if (substr($telSal, 0, 1) === '0') {
                           $telSalFr = '+33' . substr($telSal, 1);
+                      }
+                      else{
+                        $telSalFr = $telSal;
                       }
                       $rueSal = $unSalarie[13];
                       $codePostalSal = $unSalarie[14];
