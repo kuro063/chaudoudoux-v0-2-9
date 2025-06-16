@@ -969,7 +969,7 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
     /* Permet d'obtenir la liste des entretiens personnels pour chaque intervenantes en fonction de $num
     */ 
     public function obtenirListeEntretiens($num){
-        $req="SELECT * from entretiens WHERE numSalarie_Intervenants = :num ORDER BY `date` DESC";
+        $req="SELECT *, DATE_FORMAT(`date`, '%d/%m/%Y') AS date_formater from entretiens WHERE numSalarie_Intervenants = :num ORDER BY date_formater DESC";
         $cmd = $this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
         $cmd->execute();
