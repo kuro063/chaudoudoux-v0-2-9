@@ -525,7 +525,7 @@
       <th style="border:1px solid black;text-align:left"><strong>Professionnel(s)</strong></th>
       <?php foreach($lesEntretiens as $unEntretiens) {
         if ($unEntretiens["pro"] == 1){ ?>  
-          <td><?php echo $unEntretiens["date"]?></td>
+          <td><?php echo $unEntretiens["date_formater"]?></td>
       <?php }?>
     <?php } ?> 
     </tr>
@@ -533,7 +533,7 @@
       <th style="border:1px solid black;text-align:left;"><strong>Individuel(s)</strong></th>
       <?php foreach($lesEntretiens as $unEntretiens) {
         if ($unEntretiens["pro"] == 0){ ?>
-      <td><?php echo $unEntretiens["date"] ?></td>
+      <td><?php echo $unEntretiens["date_formater"] ?></td>
         <?php }?>
       <?php } ?>
     </tr>
