@@ -14,7 +14,9 @@
           <div style="float:left; width:50%"  >
             <a class="btn btn-lg btn-secondary display-4" href="index.php?uc=annuSalarie&amp;action=voirEntretien&amp;statut=indiv">Individuelle</a>
           </div>
-
+          <div style="float:left; width:100%"  >
+            <a class="btn btn-lg btn-secondary display-4" href="index.php?uc=annuSalarie&amp;action=voirEntretien&amp;statut=tous">Voir tous les Entretiens</a>
+          </div>
       </div>
 
   </div>
