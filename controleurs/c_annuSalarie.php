@@ -1013,7 +1013,7 @@ else  {
             if(lireDonneeUrl('statut') == 'pro'){
                 $entretien = $pdoChaudoudoux->listeEntretiensGlobal(1);
             }
-            else if(lireDonneeUrl('status') == 'indiv'){
+            else if(lireDonneeUrl('statut') == 'indiv'){
                 $entretien = $pdoChaudoudoux->listeEntretiensGlobal(0);
             }
             else{
