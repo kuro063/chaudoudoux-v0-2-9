@@ -982,7 +982,7 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
     ou individuel en fonction de $num
     */ 
     public function listeEntretiensGlobal($num){
-        $req="SELECT intervenants.numSalarie_Intervenants, titre_Candidats, nom_Candidats, prenom_Candidats, GROUP_CONCAT(DATE_FORMAT(`date`, '%d/%m/%Y') ORDER BY `date` DESC SEPARATOR ', ') AS dates, commentaire FROM candidats
+        $req="SELECT intervenants.numSalarie_Intervenants, entretiens.numSalarie_Intervenants, titre_Candidats, nom_Candidats, prenom_Candidats, GROUP_CONCAT(DATE_FORMAT(`date`, '%d/%m/%Y') ORDER BY `date` DESC SEPARATOR ', ') AS dates, commentaire FROM candidats
         JOIN intervenants
         ON intervenants.candidats_numcandidat_candidats = candidats.numCandidat_Candidats
         JOIN entretiens
@@ -991,6 +991,21 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
         ORDER BY dates DESC";
         $cmd = $this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
+        $cmd->execute();
+        $lignes = $cmd->fetchAll(PDO::FETCH_ASSOC);
+        $cmd->closeCursor();
+        return $lignes;
+    }
+
+    public function listeEntretiensTous(){
+        $req="SELECT intervenants.numSalarie_Intervenants, entretiens.numSalarie_Intervenants, titre_Candidats, nom_Candidats, prenom_Candidats, GROUP_CONCAT(DATE_FORMAT(`date`, '%d/%m/%Y') ORDER BY `date` DESC SEPARATOR ', ') AS dates, commentaire FROM candidats
+        JOIN intervenants
+        ON intervenants.candidats_numcandidat_candidats = candidats.numCandidat_Candidats
+        JOIN entretiens
+        ON intervenants.numSalarie_Intervenants = entretiens.numSalarie_Intervenants
+        GROUP BY prenom_Candidats
+        ORDER BY dates DESC";
+        $cmd = $this->monPdo->prepare($req);
         $cmd->execute();
         $lignes = $cmd->fetchAll(PDO::FETCH_ASSOC);
         $cmd->closeCursor();
