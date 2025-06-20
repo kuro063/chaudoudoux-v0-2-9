@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
   <head>
     <meta charset="utf-8">
     <title>Exporter les contacts</title>
@@ -326,3 +326,5 @@
         <?php }?>
       <?php }?>
     </div>
+  </body>
+</html>
