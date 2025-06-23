@@ -715,7 +715,9 @@ $compt = 1;
 					<tr><td><input type="text"  size="25" class="donnees" name="nomEnf<?php echo $compt; ?>" size="15" value="<?php echo $enfant['nom_Enfants']; ?>"></td>
   					<td><input type="text" size="25" class="donnees" name="prenomEnf<?php echo $compt; ?>" size="15" value="<?php echo $enfant['prenom_Enfants']; ?>"></td>
   					<td><input type="date" class="donnees" name="dateNaisEnf<?php echo $compt; ?>" value="<?php echo date('Y-m-d', strtotime($enfant['dateNaiss_Enfants'])); ?>" /></td>
-                                        <td><input type="checkbox" class="donnees" name="concernGarde<?php echo $compt;?>" value="1" <?php if ($enfant['concernGarde_Enfants']==1) echo "checked";?> style="height: 30px; width:30px;"/></td></tr>
+            <td><input type="checkbox" class="donnees" name="concernGarde<?php echo $compt;?>" value="1" <?php if ($enfant['concernGarde_Enfants']==1){ echo "checked";}?> style="height: 30px; width:30px;"/></td>
+          </tr>
+            
 <?php
 		$compt++;
 	}
@@ -723,7 +725,7 @@ $compt = 1;
 					<tr><td><input type="text" size="25" class="donnees" name="nomEnf<?php echo $compt; ?>" size="15" ></td>
   					<td><input type="text" size="25" class="donnees" name="prenomEnf<?php echo $compt; ?>" size="15"></td>
   					<td><input type="date" class="donnees" name="dateNaisEnf<?php echo $compt; ?>"  /></td>
-                                        <td><input type="checkbox" class="donnees" name="concernGarde<?php echo $compt;?>" style="height: 30px; width:30px;"/></td>
+                                        <td><input type="checkbox" value="1" class="donnees" name="concernGarde<?php echo $compt;?>" style="height: 30px; width:30px;"/></td>
                                         <td></td></tr><?php $compt++; }?>
   				</table>
           <br/>
