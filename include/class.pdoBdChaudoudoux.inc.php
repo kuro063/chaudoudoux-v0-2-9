@@ -2585,9 +2585,13 @@ $cmd = $this->monPdo->prepare($req);
     public function modifierDetailEnfant($num, $nom, $prenom, $dateNaiss, $compt, $concernGarde) {
         $req="";
         if ($compt==1){
-        $req = "DELETE FROM enfants WHERE numero_Famille ='".$num."';";}
+        $req = "DELETE FROM enfants WHERE numero_Famille ='".$num."';";
+        $cmd = $this->monPdo->prepare($req);
+        $cmd->execute();
+        $cmd->closeCursor();
+    }
         if ($nom != '' && $prenom != ''){
-        	$req .= "INSERT INTO enfants (nom_Enfants, prenom_Enfants, dateNaiss_Enfants, numero_Famille, concernGarde_Enfants) VALUES (upper(:nom), :prenom, :dateNaiss,'".$num."',:concernGarde);";
+        	$req = "INSERT INTO enfants (nom_Enfants, prenom_Enfants, dateNaiss_Enfants, numero_Famille, concernGarde_Enfants) VALUES (upper(:nom), :prenom, :dateNaiss,'".$num."',:concernGarde);";
            	$cmd = $this->monPdo->prepare($req);
            	$cmd->bindValue("nom", $nom);
            	$cmd->bindValue("prenom", $prenom);
