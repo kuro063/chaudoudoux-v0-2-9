@@ -223,6 +223,12 @@ document.getElementById(col_name).value="hide";*/-->
 	<input type="checkbox" name="col" value="hide" id="reg_col" onchange="hide_show_table(this.id);" checked><?php /*}*/?>
 	<span class="checkmark"></span>
 	</label>
+
+	<label class="container"><b>Archivées</b>
+	<input type="checkbox" name="col" value="hide" id="archive_col" onchange="hide_show_table(this.id);" checked><?php /*}*/?>
+	<span class="checkmark"></span>
+	</label>
+
 	<label class="container"><b>NOM(S)</b>
  	<input type="checkbox" name="col" value="hide" id="nom_col" onchange="hide_show_table(this.id);" checked>
 	 <span class="checkmark"></span>
@@ -514,6 +520,8 @@ if($action=='voirTousFamilleAssembGen') 						{echo 'participantes à l&#146asse
 
 		<th id="reg_col_head">REG</th><?php /*}*/?>
 
+		<th id="archive_col_head">Archivée</th>
+
 		<th id="nom_col_head" class="selection">Nom(s)</th>
 
 		<?php if ($action !='voirTousFact'){?><!-- -->
@@ -646,6 +654,8 @@ if($action=='voirTousFamilleAssembGen') 						{echo 'participantes à l&#146asse
         $nbEnfants = $tabNbEnfants['nbEnfants']; 
         $dateEntree=$coord['dateEntree_Famille'];
         $dateSortie=$coord['dateSortie_Famille'];
+				$familles=$pdoChaudoudoux->obtenirDetailFamille($num);
+				$archive = $familles['archive_Famille'];
         
 		//if((isset($dateSortieIntervenant[0]) && $dateSortieIntervenant[0]['dateSortie_Intervenants']!='0000-00-00') && $coord['aPourvoir_Famille']!=0){$NombreIntervenant=count($dateSortieIntervenant);}
 		//else{$NombreIntervenant=1;}
@@ -675,6 +685,9 @@ if($action=='voirTousFamilleAssembGen') 						{echo 'participantes à l&#146asse
 		/*if ($action != 'vuePrestGE' && $action !='vuePrestM'){*/?>
 
            	<td class="reg_col"><?php echo $numeros['REG_Famille'];?></td><?php /*}*/?>
+
+						<td class="archive_col"><?php if($archive==1){echo('OUI');}else{echo('NON');} ?></td>
+
            	<td class="nom_col"><a href="index.php?uc=annuFamille&amp;action=voirDetailFamille&amp;num=<?php echo $num; ?>" ><?php echo $noms; ?></a></td><?php 
 
            	if ($action !='voirTousFact'){?><td class="adresse_col"><?php echo $coord['adresse_Famille'];?></td>
