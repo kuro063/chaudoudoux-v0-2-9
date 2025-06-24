@@ -104,7 +104,7 @@ for($i = 0 ; $i < 58 ; $i++){
 <button id="btnDelPreSelection">Supprimer les selections</button>
 <br> <br>
 <div class="deroule">
-<span><h2 class="revert dropdown-toggle" style="cursor:pointer;padding:10px;border-style:solid;border-width:2px;text-align:center;border-color:#4d4d4d;align:center">AFFICHAGE COLONNES</h2></span>
+<span><h2 class="revert dropdown-toggle" style="cursor:pointer;padding:10px;border-style:solid;border-width:2px;text-align:center;border-color:#4d4d4d;">AFFICHAGE COLONNES</h2></span>
 <div class="deroule-content" style="column-count: 4">
 <form id="chks">
 </div>
