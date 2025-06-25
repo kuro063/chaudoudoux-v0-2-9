@@ -568,6 +568,7 @@ else {
 
                         if($_POST['slctJour']!="jour"){
                             $jour=$_POST['slctJour'];
+                            $jourException=$_POST[""];
                             $frequence=$_POST['frequence']; 
                             $hDeb=$_POST['Hdeb'];
                             $minDeb=$_POST['minDeb'];

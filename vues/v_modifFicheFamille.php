@@ -193,11 +193,11 @@ if ( ! estConnecte() ) {
                               <fieldset id="disponibiliteM" class="center" style="width: 55%; margin: 0 auto;">
                                 <p><strong>DEMANDES DE LA FAMILLE POUR LE MENAGE :</strong></p> 
                                 
-                                <div id='divGlobal'>
-                                  
+                                <div id='divGlobal' style="display: flex; align-items: flex-end; gap: 15px;">
+                                 <div>
                                   <label>Le :&nbsp;</label>
-                                  <select id="slctJour" name="slctJourM">
-                                    <option value="jour" selected>Jour</option>
+                                  <select id="slctJour" name="slctJourM" onchange="gererJour()"> <!--onchange() permet de faire appel à un évènement à select-->
+                                    <option value="jour" selected disabled>Choisir un Jour</option>
                                     <option value="sans importance">Sans importance</option>
                                     <option value="lundi">Lundi</option>
                                     <option value="mardi">Mardi</option>
@@ -207,8 +207,40 @@ if ( ! estConnecte() ) {
                                     <option value="samedi">Samedi</option>
                                     <option value="dimanche">Dimanche</option>
                                   </select>
-                                  
-                                  de : 
+                                </div>
+                                
+                                <!--Le 2nd select est caché il utilise une fonction pour apparraître-->
+                                <div id="exceptionJourDiv" style="display: none;">
+                                  <label>Exception :</label>
+                                  <select id="exceptionJour" name="exceptionJour">
+                                    <option value="" selected disabled>Choisir un jour</option>
+                                    <option value="sans importance">Sans importance</option>
+                                    <option value="lundi"><strong>Sauf</strong> Lundi</option>
+                                    <option value="mardi"><strong>Sauf</strong> Mardi</option>
+                                    <option value="mercredi"><strong>Sauf</strong> Mercredi</option>
+                                    <option value="jeudi"><strong>Sauf</strong> Jeudi</option>
+                                    <option value="vendredi"><strong>Sauf</strong> Vendredi</option>
+                                    <option value="samedi"><strong>Sauf</strong> Samedi</option>
+                                    <option value="dimanche"><strong>Sauf</strong> Dimanche</option>
+                                  </select>
+                                </div>
+
+                                <!-- Fonction utiliser pour faire appraître le 2nd select après une condition-->
+                                <script>
+                                  function gererJour() {
+                                    const selectJour = document.getElementById('slctJour');
+                                    const exceptionDiv = document.getElementById('exceptionJourDiv');
+
+                                    if (selectJour.value == 'sans importance') {
+                                      exceptionDiv.style.display = 'block';
+                                    } else {
+                                      exceptionDiv.style.display = 'none';
+                                    }
+                                  }
+                                </script>
+                                 
+                                 <div>
+                                  <label>de :</label> 
                                   <select name="HdebM">
                                     <?php for ($i=0; $i<24;++$i){?>
                                       <option value="<?php if($i<10){echo '0'.$i;} else {echo $i;}?>"><?php echo $i;?></option>
@@ -220,8 +252,10 @@ if ( ! estConnecte() ) {
                                       <option value='30'>30</option>
                                       <option value='45'>45</option>
                                     </select>
-                                    
-                                    à :
+                                  </div>
+
+                                  <div>
+                                    <label>à :</label>
                                     <select name="HfinM">
                                       <?php for ($i=0; $i<24;++$i){?>
                                         <option value="<?php if($i<10){echo '0'.$i;} else {echo $i;}?>"><?php echo $i;?></option>
@@ -234,12 +268,17 @@ if ( ! estConnecte() ) {
                                         <option value='30'>30</option>
                                         <option value='45'>45</option>
                                       </select>
-                                      
+                                    </div>  
+                                    <div>  
                                       <label for="frequence">Une semaine sur :</label>
                                       <input name="frequenceM" value="1" size='1' required/>
-                                      
-                                      <!-- <input type='button' onclick='resetM()' value="Réinitialiser"/> -->
                                     </div>
+                                    <div>
+                                      <label for="heures">Nombre d'heures/sem :</label>
+                                      <input  type="number" name="heuresM" step="any" min="0" max="100" required style="width: 60px;"/>
+                                    </div>
+                                      <!-- <input type='button' onclick='resetM()' value="Réinitialiser"/> -->
+                                  </div>
                                       
 
 <!-- https://code-boxx.com/add-html-code-in-javascript/ -->
