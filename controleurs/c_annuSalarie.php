@@ -1017,7 +1017,9 @@ else  {
                 $entretien = $pdoChaudoudoux->listeEntretiensGlobal(0);
             }
             else{
-                $entretien = $pdoChaudoudoux->listeEntretiensTous();
+                $entretien = $pdoChaudoudoux->listeEntretiensTousFusion();
+                /*$entretienPro = $pdoChaudoudoux->listeEntretiensGlobal(1);
+                $entretienIndiv = $pdoChaudoudoux->listeEntretiensGlobal(0);*/
             }
             include('vues/v_entretiens.php');
             break;
