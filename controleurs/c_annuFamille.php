@@ -568,7 +568,6 @@ else {
 
                         if($_POST['slctJour']!="jour"){
                             $jour=$_POST['slctJour'];
-                            $jourException=$_POST[""];
                             $frequence=$_POST['frequence']; 
                             $hDeb=$_POST['Hdeb'];
                             $minDeb=$_POST['minDeb'];
@@ -576,7 +575,7 @@ else {
                             $hFin=$_POST['Hfin'];
                             $heureDeb=$hDeb.":".$minDeb.":00";
                             $heureFin=$hFin.":".$minFin.":00";
-                            $pdoChaudoudoux->modifierLigneDemande($numDemande, $jour, $heureDeb, $heureFin, $frequence);
+                            $pdoChaudoudoux->modifierLigneDemande($numDemande, $jour, $heureDeb, $heureFin, $frequence, $jourException);
                         }
                         ajouterErreur("Demande modifiée !", $tabErreurs);
                         include('vues/v_erreurs.php');
@@ -599,6 +598,8 @@ else {
 
                     if($_POST['slctJourM']!="jour"){
                         $jour=$_POST['slctJourM'];
+                        $jourException=$_POST["exceptionJour"];
+                        $heureSem=$_POST['heureSem'];
                         $frequence=$_POST['frequenceM']; 
                         $hDeb=$_POST['HdebM'];
                         $minDeb=$_POST['minDebM'];
@@ -606,7 +607,7 @@ else {
                         $hFin=$_POST['HfinM'];
                         $heureDeb=$hDeb.":".$minDeb.":00";
                         $heureFin=$hFin.":".$minFin.":00";
-                        $pdoChaudoudoux->ajoutBesoins($num, $jour, $heureDeb,$heureFin, $activite,$frequence);
+                        $pdoChaudoudoux->ajoutBesoins($num, $jour, $heureDeb, $heureFin, $activite, $frequence, $jourException, $heureSem);
 
                     }
                     
@@ -615,6 +616,8 @@ else {
                           continue;
                         }elseif($_POST["slctJourM".$id.""]!="jour"){
                         $jour=$_POST["slctJourM".$id.""];
+                        $jourException=$_POST["exceptionJour".$id.""];
+                        $heureSem=$_POST['heureSem'.$id.""];
                         $frequence=$_POST["frequenceM".$id.""]; 
                         $hDeb=$_POST["HDebM".$id.""];
                         $minDeb=$_POST["minDebM".$id.""];
@@ -623,7 +626,7 @@ else {
                         $heureDeb=$hDeb.":".$minDeb.":00";
                         $heureFin=$hFin.":".$minFin.":00";
                         
-                        $pdoChaudoudoux->ajoutBesoins($num, $jour, $heureDeb,$heureFin, $activite,$frequence);
+                        $pdoChaudoudoux->ajoutBesoins($num, $jour, $heureDeb,$heureFin, $activite, $frequence, $jourException, $heureSem);
 
                        }}}
 
