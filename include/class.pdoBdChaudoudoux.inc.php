@@ -2154,7 +2154,8 @@ $cmd = $this->monPdo->prepare($req);
 
     public function obtenirDemandesM($num){
         $req = "SELECT DISTINCT besoinsfamille.numero_famille,famille.quartier_Famille, 
-        famille.ville_Famille ,jour, activite, heureDebut, heureFin,frequence,
+        famille.ville_Famille ,jour, exception,
+        heureSemaine, activite, heureDebut, heureFin,frequence,
         PM_Famille,besoinsfamille.id 
         from besoinsfamille 
         join famille on besoinsfamille.numero_famille=famille.numero_Famille 

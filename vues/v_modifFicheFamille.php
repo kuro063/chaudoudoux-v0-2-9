@@ -197,7 +197,7 @@ if ( ! estConnecte() ) {
                                  <div>
                                   <label>Le :&nbsp;</label>
                                   <select id="slctJour" name="slctJourM" onchange="gererJour()"> <!--onchange() permet de faire appel à un évènement à select-->
-                                    <option value="jour" selected>jour</option>
+                                    <option value="jour" selected>Jour</option>
                                     <option value="sans importance">Sans importance</option>
                                     <option value="lundi">Lundi</option>
                                     <option value="mardi">Mardi</option>
@@ -214,14 +214,14 @@ if ( ! estConnecte() ) {
                                   <label>Exception :</label>
                                   <select id="exceptionJour" name="exceptionJour">
                                     <option value="" selected disabled>Choisir un jour</option>
-                                    <option value="sans importance">NULL</option>
-                                    <option value="lundi"><strong>Sauf</strong> Lundi</option>
-                                    <option value="mardi"><strong>Sauf</strong> Mardi</option>
-                                    <option value="mercredi"><strong>Sauf</strong> Mercredi</option>
-                                    <option value="jeudi"><strong>Sauf</strong> Jeudi</option>
-                                    <option value="vendredi"><strong>Sauf</strong> Vendredi</option>
-                                    <option value="samedi"><strong>Sauf</strong> Samedi</option>
-                                    <option value="dimanche"><strong>Sauf</strong> Dimanche</option>
+                                    <option value="SANS importance">NULL</option>
+                                    <option value="SAUF lundi">Sauf Lundi</option>
+                                    <option value="SAUF mardi">Sauf Mardi</option>
+                                    <option value="SAUF mercredi">Sauf Mercredi</option>
+                                    <option value="SAUF jeudi">Sauf Jeudi</option>
+                                    <option value="SAUF vendredi">Sauf Vendredi</option>
+                                    <option value="SAUF samedi">Sauf Samedi</option>
+                                    <option value="SAUF dimanche">Sauf Dimanche</option>
                                   </select>
                                  </div>
                                  <div>
@@ -546,7 +546,7 @@ function resetGE(){
               
               
               </style>
-            <table style="width:55%;" >
+            <table id="menagePourvoi" style="width:55%;" >
               <thead>
                 
                 <th> PM </th>
@@ -573,7 +573,7 @@ function resetGE(){
                   if(!is_null($uneDemandeM['exception'])){
                     $jourException=$uneDemandeM['exception'];
                   }
-                  $jourException=$uneDemandeM['exception'];
+                  
                   $hDebM=$uneDemandeM['heureDebut'];
                   $hFinM=$uneDemandeM['heureFin'];
                   $frequenceM=$uneDemandeM['frequence'];
@@ -1139,14 +1139,14 @@ var ajoutCreneauxM = () => {
   html += "<label>Exception :&nbsp;&nbsp;</label>";
   html += "<select id='exceptionJour"+idM+"' name='exceptionJour"+idM+"'>";
   html += "<option value='' selected disabled>Choisir un jour</option>";
-  html += "<option value='sans importance'>NULL</option>";
-  html += "<option value='lundi'>Sauf Lundi</option>";
-  html += "<option value='mardi'>Sauf Mardi</option>";
-  html += "<option value='mercredi'>Sauf Mercredi</option>";
-  html += "<option value='jeudi'>Sauf Jeudi</option>";
-  html += "<option value='vendredi'>Sauf Vendredi</option>";
-  html += "<option value='samedi'>Sauf Samedi</option>";
-  html += "<option value='dimanche'>Sauf Dimanche</option>";
+  html += "<option value='SANS importance'>NULL</option>";
+  html += "<option value='SAUF lundi'>Sauf Lundi</option>";
+  html += "<option value='SAUF mardi'>Sauf Mardi</option>";
+  html += "<option value='SAUF mercredi'>Sauf Mercredi</option>";
+  html += "<option value='SAUF jeudi'>Sauf Jeudi</option>";
+  html += "<option value='SAUF vendredi'>Sauf Vendredi</option>";
+  html += "<option value='SAUF samedi'>Sauf Samedi</option>";
+  html += "<option value='SAUF dimanche'>Sauf Dimanche</option>";
   html += "</select>";
   html +="</div>";
 
