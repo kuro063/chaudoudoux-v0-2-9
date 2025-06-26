@@ -568,6 +568,8 @@ else {
 
                         if($_POST['slctJour']!="jour"){
                             $jour=$_POST['slctJour'];
+                            $jourException=$_POST["exceptionJour"];
+                            $heureSem=$_POST['heureSem'];
                             $frequence=$_POST['frequence']; 
                             $hDeb=$_POST['Hdeb'];
                             $minDeb=$_POST['minDeb'];
@@ -575,7 +577,7 @@ else {
                             $hFin=$_POST['Hfin'];
                             $heureDeb=$hDeb.":".$minDeb.":00";
                             $heureFin=$hFin.":".$minFin.":00";
-                            $pdoChaudoudoux->modifierLigneDemande($numDemande, $jour, $heureDeb, $heureFin, $frequence, $jourException);
+                            $pdoChaudoudoux->modifierLigneDemande($numDemande, $jour, $jourException, $heureSem, $heureDeb, $heureFin, $frequence);
                         }
                         ajouterErreur("Demande modifiée !", $tabErreurs);
                         include('vues/v_erreurs.php');

@@ -601,7 +601,7 @@ function resetGE(){
                   echo "<td> Menage </td>";
                   echo "<td> <strong>".$jourM." ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
                   echo "<td> Une semaine sur ".$frequenceM." </td>";
-                  echo "<td>".$heurSem."</td>";
+                  echo "<td>".$heurSem." h</div></td>";
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=modifierDemandeFamille&amp;numDemande='.$id.'">Modifier</a> </td>';
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=supprimerDemandeFamille&amp;numDemande='.$id.'">Supprimer</a> </td>';
                   // pour ajout de numFamille, mettre dans le lien au dessus après le numDemande='.$id.'&amp

@@ -3745,12 +3745,14 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
        }
 
 
-    public function modifierLigneDemande($id, $jour, $hDeb, $hFin, $freq){
+    public function modifierLigneDemande($id, $jour, $exceptionJour, $heureSem, $hDeb, $hFin, $freq){
         $req="UPDATE besoinsfamille
-        SET jour=:jour, heureDebut=:heureDebut, heureFin=:heureFin, frequence=:frequence
+        SET jour=:jour, exception=:exceptionJour, heureSemaine=:heureSem, heureDebut=:heureDebut, heureFin=:heureFin, frequence=:frequence
         WHERE id=:id";
         $cmd=$this->monPdo->prepare($req);
         $cmd->bindValue("jour",$jour);
+        $cmd->bindValue("exceptionJour",$exceptionJour);
+        $cmd->bindValue("heureSem",$heureSem);
         $cmd->bindValue("heureDebut", $hDeb);
         $cmd->bindValue("heureFin", $hFin);
         $cmd->bindValue("frequence",$freq);
