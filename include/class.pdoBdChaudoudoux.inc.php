@@ -352,21 +352,25 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
         $cmd->execute();
         $cmd->closeCursor();
     }
-    public function ajoutBesoins($num, $jour, $hDeb,$hFin, $activite,$freq)
+    public function ajoutBesoins($num, $jour, $hDeb,$hFin, $activite, $freq, $jourException, $heureSem)
     {
         
-        $req="INSERT INTO besoinsfamille(numero_famille,jour,heureDebut,heureFin,activite,frequence) VALUES (:num,:jour,:heureDebut,:heureFin,:activite,:frequence);";
+        $req="INSERT INTO besoinsfamille(numero_famille,jour, exception, heureDebut, heureFin, activite, frequence, heureSemaine)
+        VALUES (:num,:jour,:jourException,:heureDebut,:heureFin,:activite,:frequence,:heureSem);";
 
         $cmd = $this->monPdo->prepare($req);
         $cmd->bindValue('num', $num);
         $cmd->bindValue('jour', $jour);
+        $cmd->bindValue('jourException', $jourException);
         $cmd->bindValue('heureDebut', $hDeb);
         $cmd->bindValue('heureFin', $hFin);
         $cmd->bindValue('activite', $activite);
         $cmd->bindValue('frequence', $freq);
+        $cmd->bindValue('heureSem', $heureSem);
         $cmd->execute();
         $cmd->closeCursor();
     }
+    
     public function ajoutDispo($num, $jour, $hDeb,$hFin, $activite,$freq)
     {
         
