@@ -58,7 +58,7 @@ document.getElementById(col_name).value="hide";*/-->
     }
   }
 
-if($action=='voirTousFamilleBesoinMFutur')							{echo 'besoin futur pour le ménage <p style="text-transform: lowercase" >(intervenant en place actuellement) </p>';
+if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p style="text-transform: lowercase" >(intervenant en place actuellement) </p>';
    echo ($nbFamilleM);
   }
   
@@ -84,6 +84,7 @@ if($action=='voirTousFamilleBesoinMFutur')							{echo 'besoin futur pour le mé
         <th> Activité </th>
 
         <th> Jour sans <br/> importance </th>
+        <th> exception </th>
         <th> Lundi  </th>
         <th> Mardi  </th>
         <th> Mercredi  </th>
@@ -91,6 +92,7 @@ if($action=='voirTousFamilleBesoinMFutur')							{echo 'besoin futur pour le mé
         <th> Vendredi  </th>
         <th> Samedi  </th>
         <th> Dimanche  </th>
+        <th> Nombre d'heures/sem </th>
         <th> Total des heures  </th>
         <th> Email préfabriqué </th>
       </tr>
@@ -103,6 +105,8 @@ if($action=='voirTousFamilleBesoinMFutur')							{echo 'besoin futur pour le mé
     while($i<count($lesBesoinsFamillesM)){
       $numeroFamille=$lesBesoinsFamillesM[$i]['numero_Famille'];
       $PGE = $lesBesoinsFamillesM[$i]['PGE_Famille'];
+      $exceptionJour = explode(' ', $lesBesoinsFamillesM[$i]['exception']);
+      $heureSem = $lesBesoinsFamillesM[$i]['heureSemaine'];
       $PM = $lesBesoinsFamillesM[$i]['PM_Famille'];
       $nomFamille = $lesBesoinsFamillesM[$i]['nom_Parents'];
       $quartier=$lesBesoinsFamillesM[$i]["quartier_Famille"];
@@ -140,15 +144,14 @@ if($action=='voirTousFamilleBesoinMFutur')							{echo 'besoin futur pour le mé
       $sommeD=0;
       $j=0;
 
-      while($j<count($lesBesoinsFamillesM)){
-        
+      while($j<count($lesBesoinsFamillesM)){  
         if($lesBesoinsFamillesM[$j]['numero_Famille']==$lesBesoinsFamillesM[$i]['numero_Famille']){
           $jour=$lesBesoinsFamillesM[$j]["jour"];
           $heureDebut=$lesBesoinsFamillesM[$j]["heureDebut"];
           $heureFin=$lesBesoinsFamillesM[$j]["heureFin"];
           $frequence=$lesBesoinsFamillesM[$j]["frequence"];
           if($jour=="sans importance"){
-            $timeDebut    = explode(':', $heureDebut);
+            $timeDebut = explode(':', $heureDebut);
             $minutesDebut= ($timeDebut[0]*60) + ($timeDebut[1]) + ($timeDebut[2]/60);
 
             $timeFin    = explode(':', $heureFin);
@@ -275,36 +278,38 @@ if($action=='voirTousFamilleBesoinMFutur')							{echo 'besoin futur pour le mé
         $j++;
       }
      
-    $i++;
-    if($numeroFamille!=$lesBesoinsFamillesM[$i]['numero_Famille']){
-      echo "<tr>";
-      echo "<td><strong>".$numeroFamille."</strong></td>";
-      echo "<td><strong>".$PM."</strong></td>";
-      echo "<td><strong>".$PGE."</strong></td>";
-      echo "<td><strong>".$REG."</strong></td>";
-      echo '<td><a href="index.php?uc=annuFamille&action=voirDetailFamille&num='.$numFamille.'"><strong>'.$nomFamille.'</strong></a></td>';
-      echo "<td>".$ville."</td>";
-      echo "<td>".$quartier."</td>";
-      echo '<td><a href="index.php?uc=annuSalarie&action=voirDetailSalarie&num='.$numInterv.'"><strong>'.$nomIntervenat.'</strong></td>';
-      echo "<td><strong>".$dateFin."</strong></td>";
-      echo "<td><strong>".$dateApourvoir."</strong></td>";
+      $i++;
+      if($numeroFamille!=$lesBesoinsFamillesM[$i]['numero_Famille']){
+        echo "<tr>";
+        echo "<td><strong>".$numeroFamille."</strong></td>";
+        echo "<td><strong>".$PM."</strong></td>";
+        echo "<td><strong>".$PGE."</strong></td>";
+        echo "<td><strong>".$REG."</strong></td>";
+        echo '<td><a href="index.php?uc=annuFamille&action=voirDetailFamille&num='.$numFamille.'"><strong>'.$nomFamille.'</strong></a></td>';
+        echo "<td>".$ville."</td>";
+        echo "<td>".$quartier."</td>";
+        echo '<td><a href="index.php?uc=annuSalarie&action=voirDetailSalarie&num='.$numInterv.'"><strong>'.$nomIntervenat.'</strong></td>';
+        echo "<td><strong>".$dateFin."</strong></td>";
+        echo "<td><strong>".$dateApourvoir."</strong></td>";
 
-      echo "<td>MENAGE</td>";
-      
-      echo "<td>".$sansImportance."</td>";
-      echo "<td>".$lundi."</td>";
-      echo "<td>".$mardi."</td>";
-      echo "<td>".$mercredi."</td>";
-      echo "<td>".$jeudi."</td>";
-      echo "<td>".$vendredi."</td>";
-      echo "<td>".$samedi."</td>";
-      echo "<td>".$dimanche."</td>";
-      $total=$sommeL+$sommeM+$sommeMe+$sommeJ+$sommeV+$sommeS+$sommeD;
-      echo "<td><strong>".($total/60)."h</strong></td>";
-      echo '<td><a href="index.php?uc=annuFamille&action=voirEmailPrefabMenage&num='.$numFamille.'"> Voir l\'email </a></td>';
-      echo '</tr>';
+        echo "<td>MENAGE</td>";
+        
+        echo "<td>".$sansImportance."</td>";
+        echo "<td>" . (isset($exceptionJour) ? "<strong>" . $exceptionJour[0] . "</strong> " . $exceptionJour[1] : "") . "</td>";
+        echo "<td>".$lundi."</td>";
+        echo "<td>".$mardi."</td>";
+        echo "<td>".$mercredi."</td>";
+        echo "<td>".$jeudi."</td>";
+        echo "<td>".$vendredi."</td>";
+        echo "<td>".$samedi."</td>";
+        echo "<td>".$dimanche."</td>";
+        echo "<td>".(isset($heureSem) ? $heureSem . "h" : "")."</td>";
+        $total=$sommeL+$sommeM+$sommeMe+$sommeJ+$sommeV+$sommeS+$sommeD;
+        echo "<td><strong>".($total/60)."h</strong></td>";
+        echo '<td><a href="index.php?uc=annuFamille&action=voirEmailPrefabMenage&num='.$numFamille.'"> Voir l\'email </a></td>';
+        echo '</tr>';
+      }
     }
-  }
   echo "</tbody>";
   echo "</table>";  
 ?>

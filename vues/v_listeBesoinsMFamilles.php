@@ -58,8 +58,9 @@ document.getElementById(col_name).value="hide";*/-->
     }
   }
 
-if($action=='voirTousFamilleBesoinM')							{echo 'besoin immédiat pour le ménage <p style="text-transform: lowercase" >(pas d\'intervenant en place actuellement)</p>';
-   echo ($nbFamilleM);
+if($action=='voirTousFamilleBesoinM'){
+  echo 'besoin immédiat pour le ménage <p style="text-transform: lowercase" >(pas d\'intervenant en place actuellement)</p>';
+  echo ($nbFamilleM);
   }
   
   ?>
@@ -82,6 +83,7 @@ if($action=='voirTousFamilleBesoinM')							{echo 'besoin immédiat pour le mén
         <th> Activité </th>
 
         <th> Jour sans <br/> importance </th>
+        <th>Exception</th>
         <th> Lundi  </th>
         <th> Mardi  </th>
         <th> Mercredi  </th>
@@ -89,6 +91,7 @@ if($action=='voirTousFamilleBesoinM')							{echo 'besoin immédiat pour le mén
         <th> Vendredi  </th>
         <th> Samedi  </th>
         <th> Dimanche  </th>
+        <th> Nombre d'heures/sem </th>
         <th> Total des heures  </th>
         <th> Email préfabriqué </th>
       </tr>
@@ -101,6 +104,8 @@ if($action=='voirTousFamilleBesoinM')							{echo 'besoin immédiat pour le mén
     while($i<count($lesBesoinsFamillesM)){
       $numeroFamille=$lesBesoinsFamillesM[$i]['numero_Famille'];
       $PGE = $lesBesoinsFamillesM[$i]['PGE_Famille'];
+      $exceptionJour = explode(' ', $lesBesoinsFamillesM[$i]['exception']);
+      $heureSem = $lesBesoinsFamillesM[$i]['heureSemaine'];
       $PM = $lesBesoinsFamillesM[$i]['PM_Famille'];
       $nomFamille = $lesBesoinsFamillesM[$i]['nom_Parents'];
       $quartier=$lesBesoinsFamillesM[$i]["quartier_Famille"];
@@ -286,6 +291,7 @@ if($action=='voirTousFamilleBesoinM')							{echo 'besoin immédiat pour le mén
       echo "<td>MENAGE</td>";
       
       echo "<td>".$sansImportance."</td>";
+      echo "<td>" . (isset($exceptionJour) ? "<strong>" . $exceptionJour[0] . "</strong> " . $exceptionJour[1] : "") . "</td>";
       echo "<td>".$lundi."</td>";
       echo "<td>".$mardi."</td>";
       echo "<td>".$mercredi."</td>";
@@ -293,6 +299,7 @@ if($action=='voirTousFamilleBesoinM')							{echo 'besoin immédiat pour le mén
       echo "<td>".$vendredi."</td>";
       echo "<td>".$samedi."</td>";
       echo "<td>".$dimanche."</td>";
+      echo "<td>".(isset($heureSem) ? $heureSem . "h" : "")."</td>";
       $total=$sommeL+$sommeM+$sommeMe+$sommeJ+$sommeV+$sommeS+$sommeD;
       echo "<td><strong>".($total/60)."h</strong></td>";
       echo '<td><a href="index.php?uc=annuFamille&action=voirEmailPrefabMenage&num='.$numFamille.'"> Voir l\'email </a></td>';

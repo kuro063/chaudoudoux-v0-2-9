@@ -3356,8 +3356,21 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
     }
     public function obtenirBesoinsGEFamille()
     {
-        $req="SELECT distinct besoinsfamille.numero_famille ,jour,famille.quartier_Famille,REG_Famille, famille.ville_Famille,
-         activite, heureDebut, heureFin,frequence, Date_aPourvoir_PGE, enfantHand_Famille, P.nom_Parents,PM_Famille,PGE_Famille 
+        $req="SELECT distinct 
+                besoinsfamille.numero_famille,
+                jour,
+                famille.quartier_Famille,
+                REG_Famille,
+                famille.ville_Famille,
+                activite,
+                heureDebut,
+                heureFin,
+                frequence,
+                Date_aPourvoir_PGE,
+                enfantHand_Famille,
+                P.nom_Parents,
+                PM_Famille,
+                PGE_Famille 
          from besoinsfamille 
          join famille on besoinsfamille.numero_famille=famille.numero_Famille 
          join parents as P on besoinsfamille.numero_famille=P.numero_Famille
@@ -3374,8 +3387,20 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
 
     //Récupère toutes les familles à pourvoir en GE (besoin ou non)
     public function ObtenirFamilleApourvoirGE(){
-        $req = "SELECT distinct famille.numero_Famille, quartier_Famille, REG_Famille, ville_Famille, Date_aPourvoir_PGE, Pa.nom_Parents, PM_Famille,
-        PGE_Famille, besoinsfamille.jour, besoinsfamille.activite, besoinsfamille.heureDebut, besoinsfamille.heureFin, besoinsfamille.frequence
+        $req = "SELECT distinct 
+                    famille.numero_Famille,
+                    quartier_Famille,
+                    REG_Famille,
+                    ville_Famille,
+                    Date_aPourvoir_PGE,
+                    Pa.nom_Parents,
+                    PM_Famille,
+                    PGE_Famille,
+                    besoinsfamille.jour,
+                    besoinsfamille.activite,
+                    besoinsfamille.heureDebut,
+                    besoinsfamille.heureFin,
+                    besoinsfamille.frequence
         FROM famille
         JOIN besoinsfamille ON famille.numero_Famille=besoinsfamille.numero_famille
         JOIN parents AS Pa ON famille.numero_Famille=Pa.numero_Famille
@@ -3392,8 +3417,23 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
     }
 
     public function ObtenirFamilleApourvoirGEFutur(){
-        $req = "SELECT DISTINCT famille.numero_Famille, quartier_Famille, REG_Famille, ville_Famille, Date_aPourvoir_PGE, Pa.nom_Parents, PM_Famille,
-        PGE_Famille, besoinsfamille.jour, besoinsfamille.activite, besoinsfamille.heureDebut, besoinsfamille.heureFin, besoinsfamille.frequence, Pr.dateFin_Proposer, Can.nom_Candidats, Pr.numSalarie_Intervenants
+        $req = "SELECT DISTINCT 
+                    famille.numero_Famille,
+                    quartier_Famille,
+                    REG_Famille,
+                    ville_Famille,
+                    Date_aPourvoir_PGE,
+                    Pa.nom_Parents,
+                    PM_Famille,
+                    PGE_Famille,
+                    besoinsfamille.jour,
+                    besoinsfamille.activite,
+                    besoinsfamille.heureDebut,
+                    besoinsfamille.heureFin,
+                    besoinsfamille.frequence,
+                    Pr.dateFin_Proposer,
+                    Can.nom_Candidats,
+                    Pr.numSalarie_Intervenants
         FROM famille
         JOIN proposer AS Pr ON Pr.numero_Famille=famille.numero_Famille
         JOIN parents AS Pa ON famille.numero_Famille=Pa.numero_Famille
@@ -3412,17 +3452,27 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
 
     //Récupère toutes les familles à pourvoir en Ménage (besoin ou non)
     public function ObtenirFamilleApourvoirM(){
-        $req = "SELECT distinct famille.numero_Famille,quartier_Famille, REG_Famille, ville_Famille, Date_aPourvoir_PM, Pa.nom_Parents, PM_Famille,
-        PGE_Famille
+        $req = "SELECT distinct famille.numero_Famille,quartier_Famille,
+                    REG_Famille,
+                    ville_Famille,
+                    Date_aPourvoir_PM,
+                    Pa.nom_Parents,
+                    PM_Famille,
+                    PGE_Famille,
+                    besoinsfamille.jour,
+                    besoinsfamille.exception,
+                    besoinsfamille.activite,
+                    besoinsfamille.heureDebut,
+                    besoinsfamille.heureSemaine,
+                    besoinsfamille.heureFin,
+                    besoinsfamille.frequence
         from famille 
-        LEFT JOIN besoinsfamille ON famille.numero_Famille=besoinsfamille.numero_famille 
+        JOIN besoinsfamille ON famille.numero_Famille=besoinsfamille.numero_famille 
         join parents AS Pa ON Pa.numero_Famille=famille.numero_Famille
         left join proposer ON famille.numero_Famille=proposer.numero_Famille 
-        where archive_Famille=0 AND famille.aPourvoir_PM = 1 AND NOT EXISTS(
-            SELECT * FROM proposer WHERE (dateFin_Proposer>now() OR dateFin_Proposer='0000-00-00') AND famille.numero_Famille = numero_Famille AND idPresta_Prestations ='MENA' )
-        GROUP BY famille.numero_Famille 
+        where archive_Famille=0 AND activite='menage' AND NOT EXISTS(
+            SELECT * FROM proposer WHERE (dateFin_Proposer>now() OR dateFin_Proposer='0000-00-00') AND famille.numero_Famille = proposer.numero_Famille AND idPresta_Prestations ='MENA' ) 
         ORDER BY famille.numero_Famille";
-       
         $cmd = $this->monPdo->prepare($req);
         $cmd->execute();
         $lignes=$cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -3431,8 +3481,25 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
     }
 
     public function ObtenirFamilleApourvoirMFutur(){ 
-        $req = "SELECT DISTINCT famille.numero_Famille, quartier_Famille, REG_Famille, ville_Famille, Date_aPourvoir_PM, Pa.nom_Parents, PM_Famille,
-        PGE_Famille, besoinsfamille.jour, besoinsfamille.activite, besoinsfamille.heureDebut, besoinsfamille.heureFin, besoinsfamille.frequence, Pr.dateFin_Proposer, Can.nom_Candidats, Pr.numSalarie_Intervenants
+        $req = "SELECT DISTINCT 
+                    famille.numero_Famille, 
+                    quartier_Famille,
+                    REG_Famille,
+                    ville_Famille, 
+                    Date_aPourvoir_PM,
+                    Pa.nom_Parents,
+                    PM_Famille,
+                    PGE_Famille,
+                    besoinsfamille.jour,
+                    besoinsfamille.exception,
+                    besoinsfamille.activite,
+                    besoinsfamille.heureDebut,
+                    besoinsfamille.heureSemaine,
+                    besoinsfamille.heureFin,
+                    besoinsfamille.frequence,
+                    Pr.dateFin_Proposer,
+                    Can.nom_Candidats,
+                    Pr.numSalarie_Intervenants
         FROM famille
         JOIN proposer AS Pr ON Pr.numero_Famille=famille.numero_Famille
         JOIN parents AS Pa ON famille.numero_Famille=Pa.numero_Famille
