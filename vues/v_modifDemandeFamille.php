@@ -111,44 +111,44 @@
                                   <label>Exception :&nbsp;</label>
                                   <select id="exceptionJour" name="exceptionJour"> <?php
                                     if($exceptionJour=='SANS importance'){
-                                        echo('<option value="SANS importance" selected>NULL</option>');}
+                                        echo('<option value="sans importance" selected>Sans importance</option>');}
                                     else{
                                         echo('<option value="sans importance">Sans importance</option>');}
 
-                                    if($exceptionJour=='SAUF lundi'){
-                                        echo('<option value="SAUF lundi" selected>Sauf Lundi</option>');}
+                                    if($exceptionJour=='lundi'){
+                                        echo('<option value="lundi" selected>Sauf Lundi</option>');}
                                     else{
-                                        echo('<option value="SAUF lundi">Sauf Lundi</option>');}
+                                        echo('<option value="lundi">Sauf Lundi</option>');}
 
-                                    if($exceptionJour=='SAUF mardi'){
-                                        echo('<option value="SAUF mardi" selected>Sauf Mardi</option>');}
+                                    if($exceptionJour=='mardi'){
+                                        echo('<option value="mardi" selected>Sauf Mardi</option>');}
                                     else {
-                                        echo('<option value="SAUF mardi">Sauf Mardi</option>');}
+                                        echo('<option value="mardi">Sauf Mardi</option>');}
 
-                                    if($exceptionJour=='SAUF mercredi'){
-                                        echo('<option value="SAUF mercredi" selected>Sauf Mercredi</option>');}
+                                    if($exceptionJour=='mercredi'){
+                                        echo('<option value="mercredi" selected>Sauf Mercredi</option>');}
                                     else {
-                                        echo('<option value="SAUF mercredi">Sauf Mercredi</option>');}
+                                        echo('<option value="mercredi">Sauf Mercredi</option>');}
 
-                                    if($exceptionJour=='SAUF jeudi'){
-                                        echo('<option value="SAUF jeudi" selected>Sauf Jeudi</option>');}
+                                    if($exceptionJour=='jeudi'){
+                                        echo('<option value="jeudi" selected>Sauf Jeudi</option>');}
                                     else {
-                                        echo('<option value="SAUF jeudi">Sauf Jeudi</option>');}
+                                        echo('<option value="jeudi">Sauf Jeudi</option>');}
 
-                                    if($exceptionJour=='SAUF vendredi'){
-                                        echo('<option value="SAUF vendredi" selected>Sauf Vendredi</option>');}
+                                    if($exceptionJour=='vendredi'){
+                                        echo('<option value="vendredi" selected>Sauf Vendredi</option>');}
                                     else{
-                                        echo('<option value="SAUF vendredi">Sauf Vendredi</option>');} 
+                                        echo('<option value="vendredi">Sauf Vendredi</option>');} 
 
-                                    if($exceptionJour=='SAUF samedi'){
-                                        echo(' <option value="SAUF samedi" selected>Sauf Samedi</option>');}
+                                    if($exceptionJour=='samedi'){
+                                        echo(' <option value="samedi" selected>Sauf Samedi</option>');}
                                     else{
-                                        echo(' <option value="SAUF samedi">Sauf Samedi</option>');}
+                                        echo(' <option value="samedi">Sauf Samedi</option>');}
 
-                                    if($$exceptionJour=='SAUF dimanche'){
-                                        echo('<option value="SAUF dimanche" selected>Sauf Dimanche</option>');}
+                                    if($$exceptionJour=='dimanche'){
+                                        echo('<option value="dimanche" selected>Sauf Dimanche</option>');}
                                     else{
-                                        echo('<option value="SAUF dimanche">Sauf Dimanche</option>');} ?>
+                                        echo('<option value="dimanche">Sauf Dimanche</option>');} ?>
                                   </select>
                                 </div>
                                 <div>

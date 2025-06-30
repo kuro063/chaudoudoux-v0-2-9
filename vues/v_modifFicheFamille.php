@@ -193,7 +193,7 @@ if ( ! estConnecte() ) {
                               <fieldset id="disponibiliteM" class="center" style="width: 55%; margin: 0 auto;">
                                 <p><strong>DEMANDES DE LA FAMILLE POUR LE MENAGE :</strong></p> 
                                 
-                                <div id='divGlobal' style="display: flex; align-items: flex-end; flex-direction: row; gap: 10px;">
+                                <div id='divGlobal' style="display: flex; align-items: flex-end; flex-direction: row; gap: 8px;">
                                  <div>
                                   <label>Le :&nbsp;</label>
                                   <select id="slctJour" name="slctJourM" onchange="gererJour()"> <!--onchange() permet de faire appel à un évènement à select-->
@@ -214,14 +214,14 @@ if ( ! estConnecte() ) {
                                   <label>Exception :</label>
                                   <select id="exceptionJour" name="exceptionJour">
                                     <option value="" selected disabled>Choisir un jour</option>
-                                    <option value="SANS importance">NULL</option>
-                                    <option value="SAUF lundi">Sauf Lundi</option>
-                                    <option value="SAUF mardi">Sauf Mardi</option>
-                                    <option value="SAUF mercredi">Sauf Mercredi</option>
-                                    <option value="SAUF jeudi">Sauf Jeudi</option>
-                                    <option value="SAUF vendredi">Sauf Vendredi</option>
-                                    <option value="SAUF samedi">Sauf Samedi</option>
-                                    <option value="SAUF dimanche">Sauf Dimanche</option>
+                                    <option value="sans importance">Sans importance</option>
+                                    <option value="lundi">Sauf Lundi</option>
+                                    <option value="mardi">Sauf Mardi</option>
+                                    <option value="mercredi">Sauf Mercredi</option>
+                                    <option value="jeudi">Sauf Jeudi</option>
+                                    <option value="vendredi">Sauf Vendredi</option>
+                                    <option value="samedi">Sauf Samedi</option>
+                                    <option value="dimanche">Sauf Dimanche</option>
                                   </select>
                                  </div>
                                  <div>
@@ -599,7 +599,7 @@ function resetGE(){
                   echo "<td> ".$ville." </td>";
                   echo "<td> ".$quartier." </td>";
                   echo "<td> Menage </td>";
-                  echo "<td> <strong>".$jourM." ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
+                  echo "<td> <strong>".$jourM." "."SAUF ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
                   echo "<td> Une semaine sur ".$frequenceM." </td>";
                   echo "<td>".$heurSem." h</div></td>";
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=modifierDemandeFamille&amp;numDemande='.$id.'">Modifier</a> </td>';
@@ -1119,7 +1119,7 @@ function generateIdM() {
 
 var ajoutCreneauxM = () => {
   let idM = generateIdM();
-  var html = "<div id='M"+idM+"' style='display: flex; flex-direction: row; gap: 10px; align-items: flex-end;'>";
+  var html = "<div id='M"+idM+"' style='display: flex; flex-direction: row; gap: 7px; align-items: flex-end;'>";
   html +="<div>";
   html += "<label>Le :&nbsp;&nbsp;</label>";
   html += "<select id='slctJour"+idM+"' name='slctJourM"+idM+"' onchange='ajoutGererJour(this)'>";
@@ -1139,14 +1139,14 @@ var ajoutCreneauxM = () => {
   html += "<label>Exception :&nbsp;&nbsp;</label>";
   html += "<select id='exceptionJour"+idM+"' name='exceptionJour"+idM+"'>";
   html += "<option value='' selected disabled>Choisir un jour</option>";
-  html += "<option value='SANS importance'>NULL</option>";
-  html += "<option value='SAUF lundi'>Sauf Lundi</option>";
-  html += "<option value='SAUF mardi'>Sauf Mardi</option>";
-  html += "<option value='SAUF mercredi'>Sauf Mercredi</option>";
-  html += "<option value='SAUF jeudi'>Sauf Jeudi</option>";
-  html += "<option value='SAUF vendredi'>Sauf Vendredi</option>";
-  html += "<option value='SAUF samedi'>Sauf Samedi</option>";
-  html += "<option value='SAUF dimanche'>Sauf Dimanche</option>";
+  html += "<option value='sans importance'>Sans importance</option>";
+  html += "<option value='lundi'>Sauf Lundi</option>";
+  html += "<option value='mardi'>Sauf Mardi</option>";
+  html += "<option value='mercredi'>Sauf Mercredi</option>";
+  html += "<option value='jeudi'>Sauf Jeudi</option>";
+  html += "<option value='vendredi'>Sauf Vendredi</option>";
+  html += "<option value='samedi'>Sauf Samedi</option>";
+  html += "<option value='dimanche'>Sauf Dimanche</option>";
   html += "</select>";
   html +="</div>";
 
