@@ -3,6 +3,8 @@
     if (lireDonneeUrl('action')=='modifierDemandeFamille'){
 
         $jour=$laDemande[0]['jour'];
+        $exceptionJour=$laDemande[0]['exception'];
+        $heureSem=$laDemande[0]['heureSemaine'];
         $hDeb=$laDemande[0]['heureDebut'];
         $hFin=$laDemande[0]['heureFin'];
         $frequence=$laDemande[0]['frequence'];
@@ -30,22 +32,42 @@
                 <th> Activité </th>
                 <th> Jour / Horaires </th>
                 <th> Fréquence de la prestation </th>
+                <th> Nombre d'heures </th>
             </thead>
             <tbody>
                 <tr>
                     <td> $activite </td>
-                    <td>$jour - $hDeb à $hFin <br/><br/></td>
+                    <td>$jour $exceptionJour - $hDeb à $hFin <br/><br/></td>
                     <td> Une semaine sur $frequence </td>
+                    <td> $heureSem h </td>
                 </tr>
             </tbody>
         </table>
         <br/>"; ?>
 
+        <script>
+            //Fonction utiliser pour faire appraître le 2nd select après la condition "Sans importance"                            
+            function gererJour() {
+                const selectJour = document.getElementById('slctJour');
+                const exceptionDiv = document.getElementById('exceptionJourDiv');
+
+                if (selectJour.value == 'sans importance') {
+                exceptionDiv.style.display = 'block';
+                } else {
+                exceptionDiv.style.display = 'none';
+                }
+            }
+            // Appel automatiquement la fonction au chargement de la page
+            window.addEventListener('DOMContentLoaded', gererJour);
+        </script> 
+
         <div id='divGlobal'>
         <h2> Modification du besoin : </h2><br/>                     
         <form id="formModifFamille" enctype="multipart/form-data" action="index.php?uc=annuFamille&amp;action=validerDemandeFamille&amp;numDemande=<?php echo $numDemande?>" method="post">
-                                  <label>Le :&nbsp;</label>
-                                  <select id="slctJour" name="slctJour"> <?php
+            <div style="display: flex; gap: 10px; align-items: flex-end;">
+                                <div>
+                                <label>Le :&nbsp;</label>
+                                  <select id="slctJour" name="slctJour" onchange="gererJour()"> <?php
                                     //Si le jour du besoin à modifier est 'sans importance'
                                     if($jour=='sans importance'){
                                         //alors on pré-sélectionne l'<option> 'sans importance
@@ -83,8 +105,54 @@
                                     else{
                                         echo('<option value="dimanche">Dimanche</option>');} ?>
                                   </select>
-                                  
-                                  de : 
+                                </div>
+
+                                <div id="exceptionJourDiv" style="display: none;">
+                                  <label>Exception :&nbsp;</label>
+                                  <select id="exceptionJour" name="exceptionJour"> <?php
+                                    if($exceptionJour=='SANS importance'){
+                                        echo('<option value="SANS importance" selected>NULL</option>');}
+                                    else{
+                                        echo('<option value="sans importance">Sans importance</option>');}
+
+                                    if($exceptionJour=='SAUF lundi'){
+                                        echo('<option value="SAUF lundi" selected>Sauf Lundi</option>');}
+                                    else{
+                                        echo('<option value="SAUF lundi">Sauf Lundi</option>');}
+
+                                    if($exceptionJour=='SAUF mardi'){
+                                        echo('<option value="SAUF mardi" selected>Sauf Mardi</option>');}
+                                    else {
+                                        echo('<option value="SAUF mardi">Sauf Mardi</option>');}
+
+                                    if($exceptionJour=='SAUF mercredi'){
+                                        echo('<option value="SAUF mercredi" selected>Sauf Mercredi</option>');}
+                                    else {
+                                        echo('<option value="SAUF mercredi">Sauf Mercredi</option>');}
+
+                                    if($exceptionJour=='SAUF jeudi'){
+                                        echo('<option value="SAUF jeudi" selected>Sauf Jeudi</option>');}
+                                    else {
+                                        echo('<option value="SAUF jeudi">Sauf Jeudi</option>');}
+
+                                    if($exceptionJour=='SAUF vendredi'){
+                                        echo('<option value="SAUF vendredi" selected>Sauf Vendredi</option>');}
+                                    else{
+                                        echo('<option value="SAUF vendredi">Sauf Vendredi</option>');} 
+
+                                    if($exceptionJour=='SAUF samedi'){
+                                        echo(' <option value="SAUF samedi" selected>Sauf Samedi</option>');}
+                                    else{
+                                        echo(' <option value="SAUF samedi">Sauf Samedi</option>');}
+
+                                    if($$exceptionJour=='SAUF dimanche'){
+                                        echo('<option value="SAUF dimanche" selected>Sauf Dimanche</option>');}
+                                    else{
+                                        echo('<option value="SAUF dimanche">Sauf Dimanche</option>');} ?>
+                                  </select>
+                                </div>
+                                <div>
+                                  <label> de :</label> 
                                   <select name="Hdeb">
                                     <?php 
                                         for ($i=0; $i<24;++$i){
@@ -124,9 +192,8 @@
                                         else{
                                             echo("<option value='45'>45</option>");} ?>
                                       
-                                    </select>
-                                    
-                                    à :
+                                    </select>                               
+                                    <label> à :</label>
                                     <select name="Hfin">
                                       <?php 
                                         for ($i=0; $i<24;++$i){
@@ -140,7 +207,7 @@
                                             } ?>
                                       
                                       </select>
-                                      
+                                 
                                       <select name="minFin"> <?php
                                       if($divHfin[1]=='00'){
                                             echo("<option value='00' selected>00</option>");}
@@ -160,19 +227,23 @@
                                             echo("<option value='45'>45</option>");} ?>
 
                                       </select>
-                                      
+                                </div>
+                                <div>
                                       <?php echo("<label for='frequence'>Une semaine sur :</label>
                                       <input name='frequence' value='$frequence' size='1' required/>"); ?>
-                                      
-                                    </div> 
+                                </div>
+                                <div>
+                                      <?php echo("<label for='heureSem'>Nombre d'heures/sem :</label>
+                                      <input type='number' name='heureSem' value='$heureSem' step='any' min='0' max='100' required style='width: 60px;'/>"); ?>                                
+                                </div>
+                                </div>  
+            </div> 
                                     <p>
     			<input class="btn valdier btn-secondary" type="submit" name="btnValider" style="position:fixed;text-align:center;bottom:0px;left:0px" value="VALIDER" />
     		    </p>
     		    <p>
                 <button style="position:fixed;bottom:0px;right:0px" class="retour btn" onclick="history.go(-1);">RETOUR</button>
                 </p>
-        </form>
-                                                                      
-        
+        </form>                                                               
      <?php   
     }

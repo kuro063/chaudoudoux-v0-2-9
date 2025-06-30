@@ -193,10 +193,10 @@ if ( ! estConnecte() ) {
                               <fieldset id="disponibiliteM" class="center" style="width: 55%; margin: 0 auto;">
                                 <p><strong>DEMANDES DE LA FAMILLE POUR LE MENAGE :</strong></p> 
                                 
-                                <div id='divGlobal'>
-                                  
+                                <div id='divGlobal' style="display: flex; align-items: flex-end; flex-direction: row; gap: 10px;">
+                                 <div>
                                   <label>Le :&nbsp;</label>
-                                  <select id="slctJour" name="slctJourM">
+                                  <select id="slctJour" name="slctJourM" onchange="gererJour()"> <!--onchange() permet de faire appel à un évènement à select-->
                                     <option value="jour" selected>Jour</option>
                                     <option value="sans importance">Sans importance</option>
                                     <option value="lundi">Lundi</option>
@@ -207,8 +207,25 @@ if ( ! estConnecte() ) {
                                     <option value="samedi">Samedi</option>
                                     <option value="dimanche">Dimanche</option>
                                   </select>
-                                  
-                                  de : 
+                                </div>
+                                
+                                <!--Le 2nd select est caché il utilise une fonction pour apparraître-->
+                                <div id="exceptionJourDiv" style="display: none;">
+                                  <label>Exception :</label>
+                                  <select id="exceptionJour" name="exceptionJour">
+                                    <option value="" selected disabled>Choisir un jour</option>
+                                    <option value="SANS importance">NULL</option>
+                                    <option value="SAUF lundi">Sauf Lundi</option>
+                                    <option value="SAUF mardi">Sauf Mardi</option>
+                                    <option value="SAUF mercredi">Sauf Mercredi</option>
+                                    <option value="SAUF jeudi">Sauf Jeudi</option>
+                                    <option value="SAUF vendredi">Sauf Vendredi</option>
+                                    <option value="SAUF samedi">Sauf Samedi</option>
+                                    <option value="SAUF dimanche">Sauf Dimanche</option>
+                                  </select>
+                                 </div>
+                                 <div>
+                                  <label>de :</label> 
                                   <select name="HdebM">
                                     <?php for ($i=0; $i<24;++$i){?>
                                       <option value="<?php if($i<10){echo '0'.$i;} else {echo $i;}?>"><?php echo $i;?></option>
@@ -220,8 +237,10 @@ if ( ! estConnecte() ) {
                                       <option value='30'>30</option>
                                       <option value='45'>45</option>
                                     </select>
-                                    
-                                    à :
+                                  </div>
+
+                                  <div>
+                                    <label>à :</label>
                                     <select name="HfinM">
                                       <?php for ($i=0; $i<24;++$i){?>
                                         <option value="<?php if($i<10){echo '0'.$i;} else {echo $i;}?>"><?php echo $i;?></option>
@@ -234,12 +253,21 @@ if ( ! estConnecte() ) {
                                         <option value='30'>30</option>
                                         <option value='45'>45</option>
                                       </select>
-                                      
+                                    </div>  
+                                    <div>  
                                       <label for="frequence">Une semaine sur :</label>
                                       <input name="frequenceM" value="1" size='1' required/>
-                                      
-                                      <!-- <input type='button' onclick='resetM()' value="Réinitialiser"/> -->
                                     </div>
+                                    <div>
+                                      <label for="heureSem">Nombre d'heures/sem :</label>
+                                      <input  type="number" name="heureSem" step="any" min="0" max="100" required style="width: 60px;"/>
+                                    </div>
+                                      <!-- <input type='button' onclick='resetM()' value="Réinitialiser"/> -->
+                                  </div>
+                                  <!-- Conteneur pour les créneaux ajoutés -->
+                                  <div id="ajoutM">
+                                    <!-- Les nouveaux créneaux ajoutés apparaîtront ici -->
+                                  </div>
                                       
 
 <!-- https://code-boxx.com/add-html-code-in-javascript/ -->
@@ -247,34 +275,53 @@ if ( ! estConnecte() ) {
 <input type="button" id='ajoutC' onclick='ajoutCreneauxM()' value='+'/>
 <input type="button" id='suppC' onclick='suppCreneauxM()' value='-'/>
 
+</fieldset>
 
-    </fieldset>
-        <script>
-    var suppCreneauxM = () =>{
+<script>
+  function ajoutGererJour(selectElem) {
+  // Récupère l'id numérique du créneau à partir de l'id du select
+  const id = selectElem.id.replace('slctJour', '');
+  const exceptionDiv = document.getElementById('exceptionJourDiv' + id);
 
-var divId = document.getElementById("M"+idM+"");
-console.log(divId);
-idM-- ;
-console.log(idM);
-if (idM===0){
-  alert('Vous ne pouvez plus rien effacer');
+  if (selectElem.value == 'sans importance') {
+    exceptionDiv.style.display = 'block';
+  } else {
+    exceptionDiv.style.display = 'none';
+  }
 }
-divId.remove();
 
+ //Fonction utiliser pour faire appraître le 2nd select après la condition "Sans importance"                            
+  function gererJour() {
+    const selectJour = document.getElementById('slctJour');
+    const exceptionDiv = document.getElementById('exceptionJourDiv');
 
+    if (selectJour.value == 'sans importance') {
+      exceptionDiv.style.display = 'block';
+    } else {
+      exceptionDiv.style.display = 'none';
+    }
+  }
+
+var suppCreneauxM = () =>{
+  var divId = document.getElementById("M"+idM+"");
+  console.log(divId);
+  idM-- ;
+  console.log(idM);
+  if (idM===0){
+    alert('Vous ne pouvez plus rien effacer');
+  }
+  divId.remove();
 }
+
 var suppCreneauxGE = () =>{
-
-var divGE = document.getElementById("GE"+idGE+"");
-//console.log(divGE);
-idGE-- ;
-console.log(idGE);
-if (idGE===0){
-  alert('Vous ne pouvez plus rien effacer');
-}
-divGE.remove();
-
-
+  var divGE = document.getElementById("GE"+idGE+"");
+  //console.log(divGE);
+  idGE-- ;
+  console.log(idGE);
+  if (idGE===0){
+    alert('Vous ne pouvez plus rien effacer');
+  }
+  divGE.remove();
 }
 
 var ajoutCreneauxGE = () => {
@@ -374,8 +421,9 @@ function resetGE(){
                   <input type="date" id="dateGEPourvoir" class="form-control input-sm" style="height:10px;width: 200px;" name="dateGEPourvoir" 
                   <?php if($dateGEPourvoir != "0000-00-00") {echo 'value="'.$dateGEPourvoir.'"';} ?> />
                   <input class="btn-secondary btn valider" type="button" id='bouton_date_PGE' value="Date de Fin Prévue: " onclick="changeinfo(this.id);" hidden><!-- date possible-->
-                <br> 
-                <script>
+                <br>
+
+<script>
   function suppMenage(){
     if(document.getElementById('MPourvoir').checked==false){
       var div=document.getElementById('Menage').hidden=true;
@@ -403,6 +451,7 @@ function resetGE(){
 
   }
 </script>
+
                  <style>
                  
                     p{
@@ -497,7 +546,7 @@ function resetGE(){
               
               
               </style>
-            <table style="width:55%;" >
+            <table id="menagePourvoi" style="width:55%;" >
               <thead>
                 
                 <th> PM </th>
@@ -521,6 +570,10 @@ function resetGE(){
                 foreach ($demandesM as $key => $uneDemandeM)
                 {
                   $jourM=$uneDemandeM['jour'];
+                  if(!is_null($uneDemandeM['exception'])){
+                    $jourException=$uneDemandeM['exception'];
+                  }
+                  
                   $hDebM=$uneDemandeM['heureDebut'];
                   $hFinM=$uneDemandeM['heureFin'];
                   $frequenceM=$uneDemandeM['frequence'];
@@ -536,7 +589,9 @@ function resetGE(){
                   $timeFin  = explode(':', $hFinM);
                   $minutesFin= ($timeFin[0]*60) + ($timeFin[1]) + ($timeFin[2]/60);
                   
-                  $somme=($minutesFin-$minutesDebut)/$frequenceM;
+                  if(!is_null($uneDemandeM['heureSemaine'])){
+                    $heurSem=$uneDemandeM['heureSemaine'];
+                  }
                   
                   //$numFamille=$uneDemandeM['numero'];
                   echo "<tr>";
@@ -544,9 +599,9 @@ function resetGE(){
                   echo "<td> ".$ville." </td>";
                   echo "<td> ".$quartier." </td>";
                   echo "<td> Menage </td>";
-                  echo "<td> <strong>".$jourM." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
+                  echo "<td> <strong>".$jourM." ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
                   echo "<td> Une semaine sur ".$frequenceM." </td>";
-                  echo "<td>".($somme/60)."</td>";
+                  echo "<td>".$heurSem." h</div></td>";
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=modifierDemandeFamille&amp;numDemande='.$id.'">Modifier</a> </td>';
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=supprimerDemandeFamille&amp;numDemande='.$id.'">Supprimer</a> </td>';
                   // pour ajout de numFamille, mettre dans le lien au dessus après le numDemande='.$id.'&amp
@@ -1064,54 +1119,79 @@ function generateIdM() {
 
 var ajoutCreneauxM = () => {
   let idM = generateIdM();
-  
-  var html="<div id='M"+idM+"'>";
+  var html = "<div id='M"+idM+"' style='display: flex; flex-direction: row; gap: 10px; align-items: flex-end;'>";
+  html +="<div>";
   html += "<label>Le :&nbsp;&nbsp;</label>";
-  html +="<select name='slctJourM"+idM+"' name='slctJour"+idM+"'>";
-  html +="<option value='jour' selected>Jour</option>";
-  html +="<option value='sans importance'>Sans importance</option>"
-  html +="<option value='lundi'>Lundi</option>";
-  html +="<option value='mardi'>Mardi</option>";
-  html +="<option value='mercredi'>Mercredi</option>";
-  html +="<option value='jeudi'>Jeudi</option>";
-  html +="<option value='vendredi'>Vendredi</option>";
-  html +="<option value='samedi'>Samedi</option>";
-  html +="<option value='dimanche'>Dimanche</option>";
-  html +="</select>"; 
-  html +="<label>&nbsp;de :&nbsp;</label>";
-  let optionsDeb = "";
-for (let i = 0; i <= 24; i++) {
-    optionsDeb += "<option value='" + i + "'>" + i + "</option>";
-}
-html +=parent.innerHTML = "<select name='HDebM"+idM+"'>" + optionsDeb + "</select> ";
-  html +="<select name='minDebM"+idM+"'> ";
-  html +="<option value='00'>00</option>";
-  html +="<option value='15'>15</option>";
-  html +="<option value='30'>30</option>";
-  html +="<option value='45'>45</option>";
-  html +="</select>";
-  html +=" <label>  à : </label> ";
-  let options = "";
-for (let i = 0; i <= 24; i++) {
-    options += "<option value='" + i + "'>" + i + "</option>";
-}
-html +=parent.innerHTML = "<select name='HfinM"+idM+"'>" + options + "</select> ";
+  html += "<select id='slctJour"+idM+"' name='slctJourM"+idM+"' onchange='ajoutGererJour(this)'>";
+  html += "<option value='jour' selected>Jour</option>";
+  html += "<option value='sans importance'>Sans importance</option>";
+  html += "<option value='lundi'>Lundi</option>";
+  html += "<option value='mardi'>Mardi</option>";
+  html += "<option value='mercredi'>Mercredi</option>";
+  html += "<option value='jeudi'>Jeudi</option>";
+  html += "<option value='vendredi'>Vendredi</option>";
+  html += "<option value='samedi'>Samedi</option>";
+  html += "<option value='dimanche'>Dimanche</option>";
+  html += "</select>";
+  html +="</div>";
 
-  html +="<select name='minFinM"+idM+"'>";
-  html +="<option value='00'>00</option>";
-  html +="<option value='15'>15</option>";
-  html +="<option value='30'>30</option>";
-  html +="<option value='45'>45</option>";
-  html +="</select>";
-  html +="<label for='frequence'>&nbsp;Une semaine sur : </label> ";
-  html +="<input name='frequenceM"+idM+"' value='1' size='1' required/>";
+  html +="<div id='exceptionJourDiv"+idM+"' style='display: none;'>";
+  html += "<label>Exception :&nbsp;&nbsp;</label>";
+  html += "<select id='exceptionJour"+idM+"' name='exceptionJour"+idM+"'>";
+  html += "<option value='' selected disabled>Choisir un jour</option>";
+  html += "<option value='SANS importance'>NULL</option>";
+  html += "<option value='SAUF lundi'>Sauf Lundi</option>";
+  html += "<option value='SAUF mardi'>Sauf Mardi</option>";
+  html += "<option value='SAUF mercredi'>Sauf Mercredi</option>";
+  html += "<option value='SAUF jeudi'>Sauf Jeudi</option>";
+  html += "<option value='SAUF vendredi'>Sauf Vendredi</option>";
+  html += "<option value='SAUF samedi'>Sauf Samedi</option>";
+  html += "<option value='SAUF dimanche'>Sauf Dimanche</option>";
+  html += "</select>";
+  html +="</div>";
+
+  html +="<div>";
+  html += "<label>de :&nbsp;</label>";
+  html += "<select name='HDebM"+idM+"'>";
+  for (let i = 0; i < 24; i++) {
+    html += "<option value='" + (i<10 ? '0'+i : i) + "'>" + i + "</option>";
+  }
+  html += "</select>&nbsp;";
+  html += "<select name='minDebM"+idM+"'>";
+  html += "<option value='00'>00</option>";
+  html += "<option value='15'>15</option>";
+  html += "<option value='30'>30</option>";
+  html += "<option value='45'>45</option>";
+  html += "</select>";
+  html +="</div>";
+
+  html +="<div>";
+  html += "<label>à :&nbsp;</label>";
+  html += "<select name='HfinM"+idM+"'>";
+  for (let i = 0; i < 24; i++) {
+    html += "<option value='" + (i<10 ? '0'+i : i) + "'>" + i + "</option>";
+  }
+  html += "</select>&nbsp;";
+  html += "<select name='minFinM"+idM+"'>";
+  html += "<option value='00'>00</option>";
+  html += "<option value='15'>15</option>";
+  html += "<option value='30'>30</option>";
+  html += "<option value='45'>45</option>";
+  html += "</select>";
+  html +="</div>";
+
+  html +="<div>";
+  html += "<label for='frequence'>Une semaine sur&nbsp;:&nbsp;</label>";
+  html += "<input name='frequenceM"+idM+"' value='1' size='1' required/>";
+  html +="</div>";
   
-  var divGlobal =document.getElementById('divGlobal');
-  divGlobal.innerHTML += html;
-  
-  
-  
-  
+  html +="<div>";
+  html += "<label for='heureSem'>Nombre d'heures/sem&nbsp;:&nbsp;</label>";
+  html += "<input type='number' name='heureSem"+idM+"' step='any' min='0' max='100' required style='width: 60px;'/>";
+  html += "</div>";
+
+  var divAjoutM = document.getElementById('ajoutM');
+  divAjoutM.insertAdjacentHTML('beforeend', html);
 }
 
   function afficher1() {
