@@ -92,7 +92,6 @@ if($action=='voirTousFamilleBesoinM'){
         <th> Samedi  </th>
         <th> Dimanche  </th>
         <th> Nombre d'heures/sem </th>
-        <th> Total des heures  </th>
         <th> Email préfabriqué </th>
       </tr>
 	</thead>
@@ -299,9 +298,7 @@ if($action=='voirTousFamilleBesoinM'){
       echo "<td>".$vendredi."</td>";
       echo "<td>".$samedi."</td>";
       echo "<td>".$dimanche."</td>";
-      echo "<td>".(isset($heureSem) ? $heureSem . "h" : "")."</td>";
-      $total=$sommeL+$sommeM+$sommeMe+$sommeJ+$sommeV+$sommeS+$sommeD;
-      echo "<td><strong>".($total/60)."h</strong></td>";
+      echo "<td>".(isset($heureSem) ? "<strong>".$heureSem . "h" . "<strong>" : "")."</td>";
       echo '<td><a href="index.php?uc=annuFamille&action=voirEmailPrefabMenage&num='.$numFamille.'"> Voir l\'email </a></td>';
       echo '</tr>';
     }

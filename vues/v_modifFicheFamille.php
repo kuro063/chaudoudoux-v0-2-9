@@ -557,7 +557,7 @@ function resetGE(){
                 
                 <th> Jour / Horaires </th>
                 <th> Fréquence de la prestation </th>
-                <th> Nombre d'heures </th>
+                <th> Nombre d'heures <br> par <br> semaines</th>
                 
                 <th> Modifier </th>
                 <th> Supprimer </th>
@@ -648,7 +648,7 @@ echo ' ('.$num.')</strong>';?></legend>
               <th> Activité </th>
               <th> Jour / Horaires </th>
               <th> Fréquence de la prestation </th>
-              <th> Nombre d'heures </th>
+              <th> Nombre d'heures <br> par <br> intervention</th>
               <th> Modifier </th>
               <th> Supprimer </th>
 
