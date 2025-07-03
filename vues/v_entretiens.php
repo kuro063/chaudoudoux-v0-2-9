@@ -70,7 +70,7 @@
     <?php } elseif(lireDonneeUrl('statut') == 'indiv'){ ?> Entretiens individuelles :
     <?php } else {?>Tous Les entretiens <?php } ?></h3>
     <div style="margin-right:52px; margin-left:36px">
-      <?php if (lireDonneeUrl('status') == 'pro' || lireDonneeUrl('status') == 'indiv'){ ?>
+      <?php if (lireDonneeUrl('statut') == 'pro' || lireDonneeUrl('statut') == 'indiv'){ ?>
       <table class="zebre" id="listeEntretien">
         <thead> 
           <tr class="btn-secondary">
