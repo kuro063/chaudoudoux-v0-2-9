@@ -5,6 +5,7 @@
         $jour=$laDemande[0]['jour'];
         $exceptionJour=$laDemande[0]['jourException'];
         $heureSem=$laDemande[0]['heureSemaine'];
+        $heureInt=$laDemande[0]['heureIntervention'];
         $hDeb=$laDemande[0]['heureDebut'];
         $hFin=$laDemande[0]['heureFin'];
         $frequence=$laDemande[0]['frequence'];
@@ -32,7 +33,8 @@
                 <th> Activité </th>
                 <th> Jour / Horaires </th>
                 <th> Fréquence de la prestation </th>
-                <th> Nombre d'heures </th>
+                <th> Nombre d'heures / sem </th>
+                <th> Nombre d'heures / Intervention </th>
             </thead>
             <tbody>
                 <tr>
@@ -40,6 +42,7 @@
                     <td>$jour $exceptionJour - $hDeb à $hFin <br/><br/></td>
                     <td> Une semaine sur $frequence </td>
                     <td> $heureSem h </td>
+                    <td> $heureInt h </td>
                 </tr>
             </tbody>
         </table>
@@ -239,6 +242,10 @@
                                 <div>
                                       <?php echo("<label for='heureSem'>Nombre d'heures/sem :</label>
                                       <input type='number' name='heureSem' value='$heureSem' step='any' min='0' max='100' required style='width: 60px;'/>"); ?>                                
+                                </div>
+                                <div>
+                                      <?php echo("<label for='heureInt'>Heures/Intervention :</label>
+                                      <input type='number' name='heureInt' value='$heureInt' step='any' min='0' max='100' required style='width: 60px;'/>"); ?>                                
                                 </div>
                                 </div>  
             </div> 
