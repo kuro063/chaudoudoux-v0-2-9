@@ -565,13 +565,16 @@ function resetGE(){
               
                     <tbody><?php
                 $demandesM=$pdoChaudoudoux->obtenirDemandesM($num);
+                $saufString = '';
+                
                 // var_dump( $demandesM);
                 
                 foreach ($demandesM as $key => $uneDemandeM)
                 {
                   $jourM=$uneDemandeM['jour'];
-                  if(!is_null($uneDemandeM['exception'])){
-                    $jourException=$uneDemandeM['exception'];
+                  if(!is_null($uneDemandeM['jourException'])){
+                    $jourException=$uneDemandeM['jourException'];
+                    $saufString = 'SAUF';
                   }
                   
                   $hDebM=$uneDemandeM['heureDebut'];
@@ -599,7 +602,7 @@ function resetGE(){
                   echo "<td> ".$ville." </td>";
                   echo "<td> ".$quartier." </td>";
                   echo "<td> Menage </td>";
-                  echo "<td> <strong>".$jourM." "."SAUF ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
+                  echo "<td> <strong>".$jourM." ".$saufString." ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
                   echo "<td> Une semaine sur ".$frequenceM." </td>";
                   echo "<td>".$heurSem." h</div></td>";
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=modifierDemandeFamille&amp;numDemande='.$id.'">Modifier</a> </td>';

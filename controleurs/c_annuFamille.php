@@ -570,7 +570,7 @@ else {
 
                         if($_POST['slctJour']!="jour"){
                             $jour=$_POST['slctJour'];
-                            $jourException=$_POST["exceptionJour"];
+                            $jourException = (isset($_POST["exceptionJour"]) && $_POST["exceptionJour"] != "") ? $_POST["exceptionJour"] : null;
                             $heureSem=$_POST['heureSem'];
                             $frequence=$_POST['frequence']; 
                             $hDeb=$_POST['Hdeb'];

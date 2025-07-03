@@ -355,7 +355,7 @@ public function archiverIntervention($numSal, $numFam, $hDeb, $dateDeb, $idPrest
     public function ajoutBesoins($num, $jour, $hDeb,$hFin, $activite, $freq, $jourException, $heureSem)
     {
         
-        $req="INSERT INTO besoinsfamille(numero_famille,jour, exception, heureDebut, heureFin, activite, frequence, heureSemaine)
+        $req="INSERT INTO besoinsfamille(numero_famille,jour, jourException, heureDebut, heureFin, activite, frequence, heureSemaine)
         VALUES (:num,:jour,:jourException,:heureDebut,:heureFin,:activite,:frequence,:heureSem);";
 
         $cmd = $this->monPdo->prepare($req);
@@ -2154,7 +2154,7 @@ $cmd = $this->monPdo->prepare($req);
 
     public function obtenirDemandesM($num){
         $req = "SELECT DISTINCT besoinsfamille.numero_famille,famille.quartier_Famille, 
-        famille.ville_Famille ,jour, exception,
+        famille.ville_Famille ,jour, jourException,
         heureSemaine, activite, heureDebut, heureFin,frequence,
         PM_Famille,besoinsfamille.id 
         from besoinsfamille 
@@ -3460,7 +3460,7 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
                     PM_Famille,
                     PGE_Famille,
                     besoinsfamille.jour,
-                    besoinsfamille.exception,
+                    besoinsfamille.jourException,
                     besoinsfamille.activite,
                     besoinsfamille.heureDebut,
                     besoinsfamille.heureSemaine,
@@ -3491,7 +3491,7 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
                     PM_Famille,
                     PGE_Famille,
                     besoinsfamille.jour,
-                    besoinsfamille.exception,
+                    besoinsfamille.jourException,
                     besoinsfamille.activite,
                     besoinsfamille.heureDebut,
                     besoinsfamille.heureSemaine,
@@ -3814,7 +3814,7 @@ public function updateEchecInterv($num, $numCand, $dateFinArret, $dateNaiss, $TS
 
     public function modifierLigneDemande($id, $jour, $exceptionJour, $heureSem, $hDeb, $hFin, $freq){
         $req="UPDATE besoinsfamille
-        SET jour=:jour, exception=:exceptionJour, heureSemaine=:heureSem, heureDebut=:heureDebut, heureFin=:heureFin, frequence=:frequence
+        SET jour=:jour, jourException=:exceptionJour, heureSemaine=:heureSem, heureDebut=:heureDebut, heureFin=:heureFin, frequence=:frequence
         WHERE id=:id";
         $cmd=$this->monPdo->prepare($req);
         $cmd->bindValue("jour",$jour);
