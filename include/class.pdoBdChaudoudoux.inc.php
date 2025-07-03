@@ -1695,12 +1695,17 @@ $cmd = $this->monPdo->prepare($req);
         return $lignes; 
     }
     public function obtenirListeFamilleAPourvoir(){
-         $req = "SELECT distinct famille.numero_Famille,Pere.nom_Parents 
-        as nom1, Mere.nom_Parents as nom2 from famille join parents as Pere 
-        on famille.numero_Famille=Pere.numero_Famille join parents as Mere 
-        on famille.numero_Famille=Mere.numero_Famille left join proposer 
-        on famille.numero_Famille=proposer.numero_Famille where archive_Famille=0 
-        and aPourvoir_Famille=1 group by famille.numero_Famille order by nom1 asc, nom2 asc;  ";
+         $req = "SELECT distinct famille.numero_Famille, heureSemaine, Pere.nom_Parents 
+                        as nom1, Mere.nom_Parents as nom2 from famille 
+                        join parents as Pere 
+                        on famille.numero_Famille=Pere.numero_Famille 
+                        join parents as Mere 
+                        on famille.numero_Famille=Mere.numero_Famille
+                        JOIN besoinsfamille ON famille.numero_Famille = besoinsfamille.numero_famille 
+                        left join proposer 
+                        on famille.numero_Famille=proposer.numero_Famille 
+                        where archive_Famille=0 and aPourvoir_Famille=1 and activite='menage' 
+                        group by famille.numero_Famille order by nom1 asc, nom2 asc;  ";
 		$cmd = $this->monPdo->prepare($req);
         $cmd->execute();
         $lignes = $cmd->fetchAll(PDO::FETCH_ASSOC);
@@ -1718,7 +1723,7 @@ $cmd = $this->monPdo->prepare($req);
         return $lignes; 
     }
      public function obtenirListeFamilleAPourvoirM(){
-         $req = "SELECT distinct famille.numero_Famille,Pere.nom_Parents as nom1, Mere.nom_Parents as nom2 from famille join parents as Pere on famille.numero_Famille=Pere.numero_Famille join parents as Mere on famille.numero_Famille=Mere.numero_Famille left join proposer on famille.numero_Famille=proposer.numero_Famille where archive_Famille=0 and famille.aPourvoir_PM = 1 group by famille.numero_Famille order by nom1 asc, nom2 asc ;";
+         $req = "SELECT distinct famille.numero_Famille,heureSemaine,Pere.nom_Parents as nom1, Mere.nom_Parents as nom2 from famille join parents as Pere on famille.numero_Famille=Pere.numero_Famille join parents as Mere on famille.numero_Famille=Mere.numero_Famille JOIN besoinsfamille ON famille.numero_Famille = besoinsfamille.numero_famille left join proposer on famille.numero_Famille=proposer.numero_Famille where archive_Famille=0 and famille.aPourvoir_PM = 1 and activite='menage' group by famille.numero_Famille order by nom1 asc, nom2 asc ;";
         $cmd = $this->monPdo->prepare($req);
         $cmd->execute();
         $lignes = $cmd->fetchAll(PDO::FETCH_ASSOC);

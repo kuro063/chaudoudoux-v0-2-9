@@ -362,6 +362,12 @@ document.getElementById(col_name).value="hide";*/-->
 	<span class="checkmark"></span>
 	</label>
 
+		<?php } if ($action != 'voirTousFamilleAPourvoirGE' && $action !='vueMand' && $action != 'vuePrestM' && $action !='vuePrestGE' && $action!='assembGen'){?>
+	<label class="container"><b>HEURE PAR SEMAINE</b>
+	<input type="checkbox" name="col" value="hide" id="heureSemaine_prest_pourvoir_col" onchange="hide_show_table(this.id);" checked>
+	<span class="checkmark"></span>
+	</label>
+
 	<?php } if ($action != 'voirTousFamilleAPourvoirM' && $action !='vueMand' && $action != 'vuePrestM' && $action !='vuePrestGE' && $action!='assembGen'){?>
 	<label class="container"><b>A POURVOIR G. ENFANTS</b>
 	<input type="checkbox" name="col" value="hide" id="PGE_prest_pourvoir_col" onchange="hide_show_table(this.id);" checked>
@@ -571,6 +577,8 @@ if($action=='voirTousFamilleAssembGen') 						{echo 'participantes à l&#146asse
 
 		<th id="date_PM_pourvoir_col_head">Date MENAGE à Pouvoir</th>
 
+		<th id="heureSemaine_prest_pourvoir_col_head">Heures / sem</th>
+
 		<?php } if ($action != 'voirTousFamilleAPourvoirM' && $action !='vueMand' && $action!='vuePrestM' && $action!='vuePrestGE' && $action!='assembGen'){?>
 		
 		<th id="PGE_prest_pourvoir_col_head">GARDE D'ENFANTS à Pourvoir</th>
@@ -640,6 +648,7 @@ if($action=='voirTousFamilleAssembGen') 						{echo 'participantes à l&#146asse
     foreach($lesFamilles as $uneFamille) {
         
         $num = $uneFamille["numero_Famille"];
+				$heureSem = $uneFamille["heureSemaine"];
         $noms=$pdoChaudoudoux->obtenirNomFamille($num);
         $tabNbEnfants = $pdoChaudoudoux->obtenirNbEnfants($num);
         $numeros=$pdoChaudoudoux->obtenirNumerosFamille($num);
@@ -733,6 +742,8 @@ if($action=='voirTousFamilleAssembGen') 						{echo 'participantes à l&#146asse
 			echo '<td class="PM_prest_pourvoir_col">'; if ($coord['aPourvoir_Famille']==0){echo 'NON';}else {if(isset($coord['aPourvoir_PM'])&& ($coord['aPourvoir_PM']!=0)){echo "MENAGE à Pourvoir";}else{echo "";}} echo '</td>';
 
 			echo '<td class="date_PM_pourvoir_col">'; if ($coord['aPourvoir_Famille']==0){echo 'NON';}else {if(isset($coord['Date_aPourvoir_PM'])&& $coord['Date_aPourvoir_PM']!='0000-00-00'){echo dateToString($coord['Date_aPourvoir_PM']);}else{echo "";}}echo '</td>';
+
+			echo '<td class="heureSemaine_prest_pourvoir_col">'.(isset($heureSem) ? number_format($heureSem, 2, '.', '').' h' : '').'</td>';
 			
 			} if ($action!='voirTousFamilleAPourvoirM' && $action!='vueMand' && $action!='vuePrestM' && $action!='vuePrestGE' && $action!='assembGen'){ 
 
