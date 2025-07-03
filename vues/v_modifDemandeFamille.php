@@ -3,7 +3,7 @@
     if (lireDonneeUrl('action')=='modifierDemandeFamille'){
 
         $jour=$laDemande[0]['jour'];
-        $exceptionJour=$laDemande[0]['exception'];
+        $exceptionJour=$laDemande[0]['jourException'];
         $heureSem=$laDemande[0]['heureSemaine'];
         $hDeb=$laDemande[0]['heureDebut'];
         $hFin=$laDemande[0]['heureFin'];
@@ -50,11 +50,15 @@
             function gererJour() {
                 const selectJour = document.getElementById('slctJour');
                 const exceptionDiv = document.getElementById('exceptionJourDiv');
+                const exceptionSelect = document.getElementById('exceptionJour');
 
                 if (selectJour.value == 'sans importance') {
                 exceptionDiv.style.display = 'block';
                 } else {
                 exceptionDiv.style.display = 'none';
+                    if (exceptionSelect) {
+                        exceptionSelect.value = ""; // Vide la sélection
+                    }
                 }
             }
             // Appel automatiquement la fonction au chargement de la page

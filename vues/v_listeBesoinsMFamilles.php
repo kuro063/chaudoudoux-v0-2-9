@@ -104,7 +104,7 @@ if($action=='voirTousFamilleBesoinM'){
     while($i<count($lesBesoinsFamillesM)){
       $numeroFamille=$lesBesoinsFamillesM[$i]['numero_Famille'];
       $PGE = $lesBesoinsFamillesM[$i]['PGE_Famille'];
-      $exceptionJour = explode(' ', $lesBesoinsFamillesM[$i]['exception']);
+      $exceptionJour = explode(' ', $lesBesoinsFamillesM[$i]['jourException']);
       $heureSem = $lesBesoinsFamillesM[$i]['heureSemaine'];
       $PM = $lesBesoinsFamillesM[$i]['PM_Famille'];
       $nomFamille = $lesBesoinsFamillesM[$i]['nom_Parents'];
