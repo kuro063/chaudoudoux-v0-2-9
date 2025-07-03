@@ -193,7 +193,7 @@ if ( ! estConnecte() ) {
                               <fieldset id="disponibiliteM" class="center" style="width: 55%; margin: 0 auto;">
                                 <p><strong>DEMANDES DE LA FAMILLE POUR LE MENAGE :</strong></p> 
                                 
-                                <div id='divGlobal' style="display: flex; align-items: flex-end; flex-direction: row; gap: 8px;">
+                                <div id='divGlobal' style="display: flex; align-items: flex-end; flex-direction: row; gap: 8px; flex-wrap: wrap;">
                                  <div>
                                   <label>Le :&nbsp;</label>
                                   <select id="slctJour" name="slctJourM" onchange="gererJour()"> <!--onchange() permet de faire appel à un évènement à select-->
@@ -260,7 +260,12 @@ if ( ! estConnecte() ) {
                                     </div>
                                     <div>
                                       <label for="heureSem">Nombre d'heures/sem :</label>
-                                      <input  type="number" name="heureSem" step="any" min="0" max="100" required style="width: 60px;"/>
+                                      <input  type="number" name="heureSem" step="any" min="0" max="100" required style="width: 40px;"/>
+                                    </div>
+
+                                    <div>
+                                      <label for="heureInt">Heures/Intervention :</label>
+                                      <input  type="number" name="heureInt" step="any" min="0" max="100" required style="width: 40px;"/>
                                     </div>
                                       <!-- <input type='button' onclick='resetM()' value="Réinitialiser"/> -->
                                   </div>
@@ -558,6 +563,7 @@ function resetGE(){
                 <th> Jour / Horaires </th>
                 <th> Fréquence de la prestation </th>
                 <th> Nombre d'heures <br> par <br> semaines</th>
+                <th> Nombre d'heures <br> par <br> intervention</th>
                 
                 <th> Modifier </th>
                 <th> Supprimer </th>
@@ -595,6 +601,9 @@ function resetGE(){
                   if(!is_null($uneDemandeM['heureSemaine'])){
                     $heurSem=$uneDemandeM['heureSemaine'];
                   }
+                  if(!is_null($uneDemandeM['heureIntervention'])){
+                    $heurInt=$uneDemandeM['heureIntervention'];
+                  }
                   
                   //$numFamille=$uneDemandeM['numero'];
                   echo "<tr>";
@@ -605,6 +614,7 @@ function resetGE(){
                   echo "<td> <strong>".$jourM." ".$saufString." ".$jourException." - ".$hDebM." à ".$hFinM."<br><br> </strong></td>";
                   echo "<td> Une semaine sur ".$frequenceM." </td>";
                   echo "<td>".$heurSem." h</div></td>";
+                  echo "<td>".$heurInt." h</div></td>";
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=modifierDemandeFamille&amp;numDemande='.$id.'">Modifier</a> </td>';
                   echo '<td> <a href="index.php?uc=annuFamille&amp;action=supprimerDemandeFamille&amp;numDemande='.$id.'">Supprimer</a> </td>';
                   // pour ajout de numFamille, mettre dans le lien au dessus après le numDemande='.$id.'&amp
@@ -1191,6 +1201,11 @@ var ajoutCreneauxM = () => {
   html +="<div>";
   html += "<label for='heureSem'>Nombre d'heures/sem&nbsp;:&nbsp;</label>";
   html += "<input type='number' name='heureSem"+idM+"' step='any' min='0' max='100' required style='width: 60px;'/>";
+  html += "</div>";
+
+  html +="<div>";
+  html += "<label for='heureInt'>Heures/Intervention&nbsp;:&nbsp;</label>";
+  html += "<input type='number' name='heureInt"+idM+"' step='any' min='0' max='100' required style='width: 60px;'/>";
   html += "</div>";
 
   var divAjoutM = document.getElementById('ajoutM');

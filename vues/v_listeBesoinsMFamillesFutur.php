@@ -106,6 +106,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
       $PGE = $lesBesoinsFamillesM[$i]['PGE_Famille'];
       $exceptionJour = explode(' ', $lesBesoinsFamillesM[$i]['jourException']);
       $heureSem = $lesBesoinsFamillesM[$i]['heureSemaine'];
+      $heureIntI = $lesBesoinsFamillesM[$i]['heureIntervention'];
       $PM = $lesBesoinsFamillesM[$i]['PM_Famille'];
       $nomFamille = $lesBesoinsFamillesM[$i]['nom_Parents'];
       $quartier=$lesBesoinsFamillesM[$i]["quartier_Famille"];
@@ -143,9 +144,12 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
       $sommeD=0;
       $j=0;
 
+      
+
       while($j<count($lesBesoinsFamillesM)){  
         if($lesBesoinsFamillesM[$j]['numero_Famille']==$lesBesoinsFamillesM[$i]['numero_Famille']){
           $jour=$lesBesoinsFamillesM[$j]["jour"];
+          $heureInt = $lesBesoinsFamillesM[$j]['heureIntervention'];
           $heureDebut=$lesBesoinsFamillesM[$j]["heureDebut"];
           $heureFin=$lesBesoinsFamillesM[$j]["heureFin"];
           $frequence=$lesBesoinsFamillesM[$j]["frequence"];
@@ -158,7 +162,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             
             $sommeL+=($minutesFin-$minutesDebut)/$frequence;
 
-            $sansImportance.=$heureDebut."-".$heureFin."</br>";
+            $sansImportance.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             if($frequence!=1){
               $sansImportance.="une semaine sur ".$frequence."</br>";
             }
@@ -172,7 +176,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             
             $sommeL+=($minutesFin-$minutesDebut)/$frequence;
 
-            $lundi.=$heureDebut."-".$heureFin."</br>";
+            $lundi.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             // echo $sommeL;
             if($frequence!=1){
               $lundi.="une semaine sur ".$frequence."</br>";
@@ -187,7 +191,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             
             $sommeM+=($minutesFin-$minutesDebut)/$frequence;
 
-            $mardi.=$heureDebut."-".$heureFin."</br>";
+            $mardi.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             //  echo $sommeM;
             if($frequence!=1){
               $mardi.="une semaine sur ".$frequence."</br>";
@@ -202,7 +206,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             
             $sommeMe+=($minutesFin-$minutesDebut)/$frequence;
 
-            $mercredi.=$heureDebut."-".$heureFin."</br>";
+            $mercredi.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             //  echo $sommeMe;
             if($frequence!=1){
               $mercredi.="une semaine sur ".$frequence."</br>";
@@ -218,7 +222,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             $sommeJ+=($minutesFin-$minutesDebut)/$frequence;
             
 
-            $jeudi.=$heureDebut."-".$heureFin."</br>";
+            $jeudi.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             //  echo $sommeJ;
             if($frequence!=1){
               $jeudi.="une semaine sur ".$frequence."</br>";
@@ -234,7 +238,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             
             $sommeV+=($minutesFin-$minutesDebut)/$frequence;
 
-            $vendredi.=$heureDebut."-".$heureFin."</br>";
+            $vendredi.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             // echo $sommeV;
             if($frequence!=1){
               $vendredi.="une semaine sur ".$frequence."</br>";
@@ -252,7 +256,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             $samedi.=$heureDebut."-".$heureFin."</br>";
             // echo $sommeS;
             if($frequence!=1){
-              $samedi.="une semaine sur ".$frequence."</br>";
+              $samedi.="une semaine sur ".$frequence."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             }
             
           }
@@ -267,7 +271,7 @@ if($action=='voirTousFamilleBesoinMFutur'){echo 'besoin futur pour le ménage <p
             $sommeD+=($minutesFin-$minutesDebut)/$frequence;
             
 
-            $dimanche.=$heureDebut."-".$heureFin."</br>";
+            $dimanche.=$heureDebut."-".$heureFin."</br>".(isset($heureInt) ? "<strong>Durée : ".$heureInt . "h" . "<strong>" : "");
             // echo $sommeD;
             if($frequence!=1){
               $dimanche.="une semaine sur ".$frequence."</br>";
